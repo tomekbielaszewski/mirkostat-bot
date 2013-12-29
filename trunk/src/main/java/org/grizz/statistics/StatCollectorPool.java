@@ -31,7 +31,7 @@ public class StatCollectorPool {
 	}
 
 	public void collect() {
-		List<Entry> entries = entryProvider.getLatestEntries();
+		List<Entry> entries = entryProvider.getEntries();
 		
 		for (Entry entry : entries) {
 			if(!duplicateFilter.isDuplicated(entry)) {

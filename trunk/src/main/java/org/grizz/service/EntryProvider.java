@@ -18,13 +18,13 @@ public class EntryProvider {
 		COLLECTION_PERIOD = collectionPeriod;
 	}
 
-	public List<Entry> getLatestEntries() {
+	public List<Entry> getEntries() {
 		int page = 0;
 		Date currentDate = new Date();
 		List<Entry> entriesDownloaded = new ArrayList<>();
 		
 		while(!oldEntryFound) {
-			System.out.println("Downloading microblog page number "+page+"...");
+			System.out.println("Downloading microblog page "+page+"...");
 			Entry[] entries = microblog.index(page);
 			System.out.println("Downloaded! Now validating entries date...");
 			

@@ -11,11 +11,11 @@ public class UserEntryCounter extends AbstractStatCounter {
 		addToCounter(entry.getAuthor(), 1);
 	}
 	
-	public int getHighestEntryRate() {
-		return getEntryWithHighestCount().getValue();
+	public int getEntryRate(int position) {
+		return getEntryOnPosition(position).getValue();
 	}
 	
-	public String getUserWithHighestEntryRate() {
-		return (String) getEntryWithHighestCount().getKey();
+	public String getUserEntryRate(int position) {
+		return (String) getEntryOnPosition(position).getKey();
 	}
 }

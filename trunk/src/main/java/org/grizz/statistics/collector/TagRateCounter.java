@@ -21,11 +21,11 @@ public class TagRateCounter extends AbstractStatCounter {
 		}
 	}
 	
-	public int getHighestTagRate() {
-		return getEntryWithHighestCount().getValue();
+	public int getTagRate(int position) {
+		return getEntryOnPosition(position).getValue();
 	}
 	
-	public String getTagWithHighestRate() {
-		return (String) getEntryWithHighestCount().getKey();
+	public String getTag(int position) {
+		return (String) getEntryOnPosition(position).getKey();
 	}
 }

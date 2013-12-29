@@ -11,11 +11,11 @@ public class UserTypedCharactersCounter extends AbstractStatCounter {
 		addToCounter(entry.getAuthor(), entry.getBody().length());
 	}
 	
-	public int getHighestTypedCharactersRate() {
-		return getEntryWithHighestCount().getValue();
+	public int getTypedCharactersRate(int position) {
+		return getEntryOnPosition(position).getValue();
 	}
 	
-	public String getUserWithHighestTypedCharactersRate() {
-		return (String) getEntryWithHighestCount().getKey();
+	public String getUserTypedCharactersRate(int position) {
+		return (String) getEntryOnPosition(position).getKey();
 	}
 }

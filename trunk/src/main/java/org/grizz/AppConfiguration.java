@@ -3,6 +3,7 @@ package org.grizz;
 import org.grizz.printer.ApplicationTagPrinter;
 import org.grizz.printer.StatPrinter;
 import org.grizz.printer.StatSummaryPrinter;
+import org.grizz.printer.TagStatsPrinter;
 import org.grizz.printer.UserCharactersStatPrinter;
 import org.grizz.printer.UserEntriesStatPrinter;
 import org.grizz.service.EntryProvider;
@@ -26,9 +27,9 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfiguration {
 	private static final String APP_KEY = "QRyIcO0ZUu";
 	private static final String SECRET_KEY = "E3NWFSkUqN";
-//	private static final long LONG_TICK_TIME = 3600000l; //1 godzina
-//	private static final long LONG_TICK_TIME = 20000l; //20 sekund
-	private static final long COLLECTION_PERIOD = 86400000; //doba
+//	private static final long COLLECTION_PERIOD = 86400000; //doba
+	private static final long COLLECTION_PERIOD = 3600000l; //1 godzina
+	private static final int AMOUNT_OF_TAG_STATS = 10;
 	
 	@Autowired
 	private EntryCounter entryCounter;
@@ -53,6 +54,11 @@ public class AppConfiguration {
 	private StatSummaryPrinter statSummaryPrinter;
 	@Autowired
 	private ApplicationTagPrinter applicationTagPrinter;
+
+	@Bean
+	public TagStatsPrinter tagStatsPrinter() {
+		return new TagStatsPrinter(AMOUNT_OF_TAG_STATS);
+	}
 	
 	@Bean
 	public URLBuilder urlBuilder() {
@@ -63,11 +69,6 @@ public class AppConfiguration {
 	public URLEncoder urlEncoder() {
 		return new URLEncoder(SECRET_KEY);
 	}
-//	
-//	@Bean
-//	public Timer timer() {
-//		return new Timer(LONG_TICK_TIME);
-//	}
 	
 	@Bean
 	public EntryProvider entryProvider() {
@@ -88,8 +89,9 @@ public class AppConfiguration {
 				userTypedCharactersCounter
 		};
 		StatPrinter[] printers = new StatPrinter[]{
-				mostActiveUserStatPrinter, userCharactersStatPrinter,
-				statSummaryPrinter, applicationTagPrinter
+				tagStatsPrinter(), mostActiveUserStatPrinter, 
+				userCharactersStatPrinter, statSummaryPrinter, 
+				applicationTagPrinter
 		};
 		
 		return factory.create(collectors, printers);

@@ -13,13 +13,31 @@ public class UserCharactersStatPrinter implements StatPrinter {
 
 	@Override
 	public void print(Output output) {
-		String user = charactersCounter.getUserWithHighestTypedCharactersRate();
-		int characters = charactersCounter.getHighestTypedCharactersRate();
-		String plural = StringPlural.choose(new String[]{"znak","znaki","znaków"}, characters);
+		int amountOfStats = 3;
+		String[] charactersPlurals = new String[]{"znak","znaki","znaków"};
 		
-		output.append("Najwięcej piszący użytkownik ostatniech 24 godzin:\n");
-		output.append("@"+user+": "+characters+" "+plural+"!");
+		String template = "Najwięcej piszący użytkownicy ostatnich 24 godzin:\n";
+
+		for (int i = 1; i <= amountOfStats; i++) {
+			template += i+". @%s: %d %s";
+			if(i < amountOfStats) {
+				template += "\n";
+			}
+		}
 		
+		Object[] statistics = new Object[amountOfStats * 3];
+
+		for (int i = 0; i < amountOfStats*3; i += 3) {
+			statistics[i] = charactersCounter.getUserTypedCharactersRate(i);
+			int amountOfCharacters = charactersCounter.getTypedCharactersRate(i);
+			
+			statistics[i+1] = amountOfCharacters;
+			statistics[i+2] = StringPlural.choose(charactersPlurals, amountOfCharacters);
+		}
+		
+		String formattedStatistics = String.format(template, statistics);
+		
+		output.append(formattedStatistics);
 		output.append("\n\n");
 	}
 
