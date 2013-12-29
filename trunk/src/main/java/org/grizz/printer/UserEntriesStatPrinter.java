@@ -17,7 +17,7 @@ public class UserEntriesStatPrinter implements StatPrinter {
 		int entries = userEntryCounter.getHighestEntryRate();
 		String plural = StringPlural.choose(new String[]{"wpis","wpisy","wpisów"}, entries);
 		
-		output.append("Najczęściej piszący użytkownik ostatniej godziny:\n");
+		output.append("Najczęściej piszący użytkownik ostatnich 24 godzin:\n");
 		output.append("@"+user+": "+entries+" "+plural+"!");
 		
 		output.append("\n\n");

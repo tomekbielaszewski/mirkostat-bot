@@ -34,7 +34,7 @@ public class StatSummaryPrinter implements StatPrinter {
 		String tagPlural = StringPlural.choose(new String[]{"unikatowy tag","unikatowe tagi","unikatowych tagów"}, overallTagsUsed);
 		
 		String summary = 
-			String.format("Przez ostatnią godzinę %d %s %d %s "
+			String.format("Przez ostatnie 24 godziny %d %s %d %s "
 					+ "o łącznej długości %d %s. Użyto przy tym %d %s.",
 			amountOfUsers, mirekPlural, 
 			amountOfEntries, entryPlural,

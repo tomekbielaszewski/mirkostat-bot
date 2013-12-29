@@ -1,6 +1,5 @@
 package org.grizz;
 
-import org.grizz.service.Timer;
 import org.grizz.statistics.StatCollectorPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -9,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Starter2 {
-	private long shortTickTime = 10000;
+//	private long shortTickTime = 10000;
 	
-	@Autowired
-	private Timer timer;
+//	@Autowired
+//	private Timer timer;
 	
 	@Autowired
 	private StatCollectorPool statCollectorPool;
@@ -27,22 +26,25 @@ public class Starter2 {
 	}
 
 	private void run() {
-		while(true) {
-			timer.start();
-			
-			while(timer.isRunning()) {
-				statCollectorPool.collect();
-				sleep(shortTickTime);
-			}
-			
-			statCollectorPool.printStats();
-			statCollectorPool.reset();
-		}
+//		while(true) {
+//			timer.start();
+//			
+//			while(timer.isRunning()) {
+//				statCollectorPool.collect();
+//				sleep(shortTickTime);
+//			}
+//			
+//			statCollectorPool.printStats();
+//			statCollectorPool.reset();
+//		}
+		
+		statCollectorPool.collect();
+		statCollectorPool.printStats();
 	}
 
-	private void sleep(long tickTime) {
-		try {
-			Thread.sleep(tickTime);
-		} catch (InterruptedException e) { /*ignore*/ }
-	}
+//	private void sleep(long tickTime) {
+//		try {
+//			Thread.sleep(tickTime);
+//		} catch (InterruptedException e) { /*ignore*/ }
+//	}
 }

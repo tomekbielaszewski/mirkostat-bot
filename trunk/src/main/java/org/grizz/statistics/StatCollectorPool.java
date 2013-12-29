@@ -38,10 +38,10 @@ public class StatCollectorPool {
 				for (StatCollector collector : statCollectors) {
 					collector.collect(entry);
 				}
-				System.out.println(entry.getId());
+			} else {
+				System.out.println("Duplicate found! ID: " + entry.getId());
 			}
 		}
-		System.out.println("####");
 	}
 
 	public void printStats() {

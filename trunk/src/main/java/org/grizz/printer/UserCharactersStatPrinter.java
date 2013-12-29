@@ -17,7 +17,7 @@ public class UserCharactersStatPrinter implements StatPrinter {
 		int characters = charactersCounter.getHighestTypedCharactersRate();
 		String plural = StringPlural.choose(new String[]{"znak","znaki","znaków"}, characters);
 		
-		output.append("Najwięcej piszący użytkownik ostatniej godziny:\n");
+		output.append("Najwięcej piszący użytkownik ostatniech 24 godzin:\n");
 		output.append("@"+user+": "+characters+" "+plural+"!");
 		
 		output.append("\n\n");
