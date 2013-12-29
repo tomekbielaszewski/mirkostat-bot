@@ -1,6 +1,7 @@
 package org.grizz;
 
 import org.grizz.printer.StatPrinter;
+import org.grizz.printer.StatSummaryPrinter;
 import org.grizz.printer.UserCharactersStatPrinter;
 import org.grizz.printer.UserEntriesStatPrinter;
 import org.grizz.service.Timer;
@@ -46,6 +47,8 @@ public class AppConfiguration {
 	private UserEntriesStatPrinter mostActiveUserStatPrinter;
 	@Autowired
 	private UserCharactersStatPrinter userCharactersStatPrinter;
+	@Autowired
+	private StatSummaryPrinter statSummaryPrinter;
 	
 	@Bean
 	public URLBuilder urlBuilder() {
@@ -76,7 +79,8 @@ public class AppConfiguration {
 				userTypedCharactersCounter
 		};
 		StatPrinter[] printers = new StatPrinter[]{
-				mostActiveUserStatPrinter, userCharactersStatPrinter
+				mostActiveUserStatPrinter, userCharactersStatPrinter,
+				statSummaryPrinter
 		};
 		
 		return factory.create(collectors, printers);

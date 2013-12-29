@@ -6,14 +6,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.grizz.model.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TagExtractor {
-	@Autowired
-	private MassiveHibernateOperationsService hibernateOperationsService;
-	
+
 	public Set<Tag> extract(String body) {
 		Set<Tag> tags = new HashSet<>();
 		Pattern p = Pattern.compile("#\\w{2,}", Pattern.CASE_INSENSITIVE);

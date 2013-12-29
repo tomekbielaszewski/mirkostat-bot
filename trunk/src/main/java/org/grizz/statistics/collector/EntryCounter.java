@@ -20,7 +20,7 @@ public class EntryCounter implements StatCollector {
 		entries.clear();
 	}
 	
-	public int getNumberOfUsers() {
+	public int getNumberOfEntries() {
 		return entries.size();
 	}
 
