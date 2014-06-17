@@ -2,7 +2,7 @@ package org.grizz.output;
 
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class SystemOutput implements Output {
 	private StringBuilder stringBuilder = new StringBuilder();
 
