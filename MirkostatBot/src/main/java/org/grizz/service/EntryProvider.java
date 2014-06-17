@@ -26,7 +26,7 @@ public class EntryProvider {
 		while(!(oldEntryFound || page >= 200)) {
 			System.out.println("Downloading microblog page "+page+"...");
 			Entry[] entries = microblog.index(page);
-			System.out.println("Downloaded! Now validating entries date...");
+//			System.out.println("Downloaded! Now validating entries date...");
 			
 			for (Entry entry : entries) {
 				if(validateEntryDate(entry.getDateAdded(), currentDate)) {
@@ -41,7 +41,7 @@ public class EntryProvider {
 				System.out.println("On the page "+page+" found entry which is more than 24h old!\n"
 						+ "Download is finished!");
 			} else {
-				System.out.println("All entries are young!");
+//				System.out.println("All entries are young!");
 			}
 			
 			page++;

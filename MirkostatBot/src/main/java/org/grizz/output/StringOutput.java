@@ -1,16 +1,17 @@
 package org.grizz.output;
 
 import org.grizz.utils.Emergency;
+import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class StringOutput implements Output {
 	private StringBuilder stringBuilder;
-	
-	public void setStringBuilder(StringBuilder stringBuilder) {
-		this.stringBuilder = stringBuilder;
-	}
-	
-	@Override
+
+    public StringOutput() {
+        stringBuilder = new StringBuilder();
+    }
+
+    @Override
 	public void append(String output) {
 		Emergency.checkPrecondition(stringBuilder != null, "stringBuilder == null");
 		stringBuilder.append(output);

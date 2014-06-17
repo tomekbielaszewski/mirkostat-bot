@@ -39,7 +39,7 @@ public class StatCollectorPool {
 					collector.collect(entry);
 				}
 			} else {
-				System.out.println("Duplicate found! ID: " + entry.getId());
+//				System.out.println("Duplicate found! ID: " + entry.getId());
 			}
 		}
 	}
@@ -48,8 +48,6 @@ public class StatCollectorPool {
 		for (StatPrinter printer : statPrinters) {
 			printer.print(output);
 		}
-		
-		output.flush();
 	}
 
 	public void reset() {

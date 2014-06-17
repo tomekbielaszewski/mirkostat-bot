@@ -2,17 +2,8 @@ package org.grizz.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
-
 import com.google.gson.annotations.SerializedName;
 
-@RooJavaBean
-@RooToString
 public class Entry implements Identifable {
 
     private Long id;
@@ -22,8 +13,6 @@ public class Entry implements Identifable {
     @SerializedName("author_group")
     private String authorGroup;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
     @SerializedName("date")
     private Date dateAdded;
 
