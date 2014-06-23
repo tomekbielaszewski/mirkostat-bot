@@ -4,7 +4,7 @@
     <groupId>org.grizz</groupId>
     <artifactId>Mirkostatbot</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.0.BUILD-SNAPSHOT</version>
+    <version>1.2.0.BUILD-SNAPSHOT</version>
     <name>Tagger</name>
 
     <properties>
@@ -45,17 +45,21 @@
         </pluginRepository>
     </pluginRepositories>
     <dependencies>
-    
-    	<dependency>
+        <dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.2.4</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.3.1</version>
-		</dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.3.4</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
