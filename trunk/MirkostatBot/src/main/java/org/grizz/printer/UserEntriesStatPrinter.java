@@ -14,9 +14,9 @@ public class UserEntriesStatPrinter implements StatPrinter {
 	@Override
 	public void print(Output output) {
 		int amountOfStats = 3;
-		String[] entriesPlurals = new String[]{"wpis","wpisy","wpisów"};
+		String[] entriesPlurals = new String[]{"wpis","wpisy","wpisow"};
 		
-		String template = "Najczęściej piszący użytkownicy ostatnich 24 godzin:\n";
+		String template = "Najczesciej piszacy uzytkownicy ostatnich 24 godzin:\n";
 
 		for (int i = 1; i <= amountOfStats; i++) {
 			template += i+". @%s: %d %s";
@@ -28,8 +28,9 @@ public class UserEntriesStatPrinter implements StatPrinter {
 		Object[] statistics = new Object[amountOfStats * 3];
 
 		for (int i = 0; i < amountOfStats*3; i += 3) {
-			statistics[i] = userEntryCounter.getUserEntryRate(i);
-			int amountOfEntries = userEntryCounter.getEntryRate(i);
+            int index = i/3;
+			statistics[i] = userEntryCounter.getUserEntryRate(index);
+			int amountOfEntries = userEntryCounter.getEntryRate(index);
 			
 			statistics[i+1] = amountOfEntries;
 			statistics[i+2] = StringPlural.choose(entriesPlurals, amountOfEntries);

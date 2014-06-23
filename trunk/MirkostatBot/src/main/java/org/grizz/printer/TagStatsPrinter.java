@@ -1,7 +1,5 @@
 package org.grizz.printer;
 
-import java.util.Arrays;
-
 import org.grizz.output.Output;
 import org.grizz.statistics.collector.EntryCounter;
 import org.grizz.statistics.collector.TagRateCounter;
@@ -34,17 +32,16 @@ public class TagStatsPrinter implements StatPrinter {
 		Object[] statistics = new Object[amountOfStats * 4];
 
 		for (int i = 0; i < amountOfStats*4; i += 4) {
-			String tag = tagRateCounter.getTag(i);
+            int index = i/4;
+			String tag = tagRateCounter.getTag(index);
 			tag = tag.substring(1);
-            int percent = (int)(((float)tagRateCounter.getTagRate(i) / (float)amountOfEntries) * 100);
+            int percent = (int)(((float)tagRateCounter.getTagRate(index) / (float)amountOfEntries) * 100);
 			
 			statistics[i] = tag;
 			statistics[i+1] = tag;
-			statistics[i+2] = tagRateCounter.getTagRate(i);
+			statistics[i+2] = tagRateCounter.getTagRate(index);
 			statistics[i+3] = percent > 0 ? percent+"%" : "<1%";
 		}
-		System.out.println("template:" + template);
-		System.out.println("stats: " + Arrays.toString(statistics));
 		String formattedStatistics = String.format(template, statistics);
 		
 		output.append(formattedStatistics);

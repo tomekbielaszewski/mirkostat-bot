@@ -14,9 +14,9 @@ public class UserCharactersStatPrinter implements StatPrinter {
 	@Override
 	public void print(Output output) {
 		int amountOfStats = 3;
-		String[] charactersPlurals = new String[]{"znak","znaki","znaków"};
+		String[] charactersPlurals = new String[]{"znak","znaki","znakow"};
 		
-		String template = "Najwięcej piszący użytkownicy ostatnich 24 godzin:\n";
+		String template = "Najwiecej piszacy uzytkownicy ostatnich 24 godzin:\n";
 
 		for (int i = 1; i <= amountOfStats; i++) {
 			template += i+". @%s: %d %s";
@@ -28,8 +28,9 @@ public class UserCharactersStatPrinter implements StatPrinter {
 		Object[] statistics = new Object[amountOfStats * 3];
 
 		for (int i = 0; i < amountOfStats*3; i += 3) {
-			statistics[i] = charactersCounter.getUserTypedCharactersRate(i);
-			int amountOfCharacters = charactersCounter.getTypedCharactersRate(i);
+            int index = i/3;
+			statistics[i] = charactersCounter.getUserTypedCharactersRate(index);
+			int amountOfCharacters = charactersCounter.getTypedCharactersRate(index);
 			
 			statistics[i+1] = amountOfCharacters;
 			statistics[i+2] = StringPlural.choose(charactersPlurals, amountOfCharacters);
