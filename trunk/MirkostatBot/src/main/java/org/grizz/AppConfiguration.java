@@ -7,7 +7,6 @@ import org.grizz.printer.*;
 import org.grizz.service.EntryProvider;
 import org.grizz.service.HTTPRequestService;
 import org.grizz.service.URLBuilder;
-import org.grizz.service.URLEncoder;
 import org.grizz.service.post.WykopUrlSigner;
 import org.grizz.statistics.StatCollectorPool;
 import org.grizz.statistics.StatCollectorPoolFactory;
@@ -99,11 +98,6 @@ public class AppConfiguration {
 	@Bean
 	public URLBuilder urlBuilder() {
 		return new URLBuilder(APP_KEY);
-	}
-	
-	@Bean
-	public URLEncoder urlEncoder() {
-		return new URLEncoder(SECRET_KEY);
 	}
 	
 	@Bean
