@@ -1,54 +1,74 @@
 package org.grizz.service;
 
+import org.grizz.model.Entry;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.grizz.model.Entry;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class EntryProvider {
 	private final long COLLECTION_PERIOD;
 	
 	@Autowired
 	private MicroblogService microblog;
-	private boolean oldEntryFound;
-	
+
 	public EntryProvider(long collectionPeriod) {
 		COLLECTION_PERIOD = collectionPeriod;
 	}
 
 	public List<Entry> getEntries() {
-		int page = 0;
 		Date currentDate = new Date();
 		List<Entry> entriesDownloaded = new ArrayList<>();
-		
-		while(!(oldEntryFound || page >= 200)) {
-			System.out.println("Downloading microblog page "+page+"...");
-			Entry[] entries = microblog.index(page);
-//			System.out.println("Downloaded! Now validating entries date...");
-			
-			for (Entry entry : entries) {
-				if(validateEntryDate(entry.getDateAdded(), currentDate)) {
-					entriesDownloaded.add(entry);
-				} else {
-					oldEntryFound = true;
-					break;
-				}
-			}
-			
-			if(oldEntryFound || page > 200) {
-				System.out.println("On the page "+page+" found entry which is more than 24h old!\n"
-						+ "Download is finished!");
-			} else {
-//				System.out.println("All entries are young!");
-			}
-			
-			page++;
-		}
+
+		boolean isOldEntryFound = iterateWithStreamIndex(entriesDownloaded, currentDate, 100);
+        if(!isOldEntryFound) {
+            Entry lastEntry = entriesDownloaded.get(entriesDownloaded.size() - 1);
+            iterateWithStreamfirstId(lastEntry.getId(), entriesDownloaded, currentDate);
+        }
 		
 		return entriesDownloaded;
 	}
+
+    private boolean iterateWithStreamIndex(List<Entry> downloadedEntries, Date currentDate, int maxPage) {
+        boolean oldEntryFound = false;
+        int page = 1;
+
+        while(!(oldEntryFound || page >= maxPage)) {
+            Entry[] entries = microblog.index(page);
+
+            for (Entry entry : entries) {
+                if(validateEntryDate(entry.getDateAdded(), currentDate)) {
+                    downloadedEntries.add(entry);
+                } else {
+                    oldEntryFound = true;
+                    break;
+                }
+            }
+            page++;
+        }
+
+        return oldEntryFound;
+    }
+
+    private void iterateWithStreamfirstId(Long lastId, List<Entry> downloadedEntries, Date currentDate) {
+        boolean oldEntryFound = false;
+
+        while(!oldEntryFound) {
+            Entry[] entries = microblog.next(lastId);
+
+            for (Entry entry : entries) {
+                if(validateEntryDate(entry.getDateAdded(), currentDate)) {
+                    downloadedEntries.add(entry);
+                } else {
+                    oldEntryFound = true;
+                    break;
+                }
+            }
+
+            lastId = entries[entries.length - 1].getId();
+        }
+    }
 
 	private boolean validateEntryDate(Date dateAdded, Date currentDate) {
 		long timeAdded = dateAdded.getTime();
