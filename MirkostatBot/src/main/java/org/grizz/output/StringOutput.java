@@ -1,7 +1,8 @@
 package org.grizz.output;
 
-import org.grizz.utils.Emergency;
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.NotNull;
 
 @Service
 public class StringOutput implements Output {
@@ -12,8 +13,7 @@ public class StringOutput implements Output {
     }
 
     @Override
-	public void append(String output) {
-		Emergency.checkPrecondition(stringBuilder != null, "stringBuilder == null");
+	public void append(@NotNull String output) {
 		stringBuilder.append(output);
 	}
 
