@@ -2,18 +2,25 @@ package org.grizz;
 
 import org.grizz.output.Output;
 import org.grizz.output.StringOutput;
+import org.grizz.service.post.EntryPoster;
 import org.grizz.statistics.StatCollectorPool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Starter2 {
+public class Starter {
 	@Autowired
 	private StatCollectorPool statCollectorPool;
     @Autowired
     private Output output;
+    @Autowired
+    @Qualifier("mirkoEntryPoster")
+//    @Qualifier("systemOutEntryPoster")
+    private EntryPoster entryPoster;
 	
 	public static void main(String[] args) {
 		System.out.println("Application context is loading...");
@@ -21,19 +28,28 @@ public class Starter2 {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:META-INF/spring/applicationContext**.xml");
 		System.out.println("Application context loading is done!");
 
-		String output = context.getBean(Starter2.class).run();
-        System.out.println(output);
+//		context.getBean(Starter.class).run();
     }
 
-	public String run() {
-		statCollectorPool.collect();
-		statCollectorPool.printStats();
-		statCollectorPool.reset();
+    @Scheduled(cron = "* 00 17 * * *")
+	public void run() {
+        String mirkoStatBotEntryBody = getMirkoStatBotEntryBody();
+        printMirkoStatBot(mirkoStatBotEntryBody);
+    }
+
+    public String getMirkoStatBotEntryBody() {
+        statCollectorPool.collect();
+        statCollectorPool.printStats();
+        statCollectorPool.reset();
 
         try {
             return ((StringOutput) output).getOutput();
         } finally {
             output.flush();
         }
-	}
+    }
+
+    private void printMirkoStatBot(String mirkoStatBotEntryBody) {
+        entryPoster.post(mirkoStatBotEntryBody);
+    }
 }

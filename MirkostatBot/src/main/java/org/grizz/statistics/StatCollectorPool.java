@@ -1,8 +1,5 @@
 package org.grizz.statistics;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.grizz.model.Entry;
 import org.grizz.output.Output;
 import org.grizz.printer.StatPrinter;
@@ -10,6 +7,9 @@ import org.grizz.service.DuplicateFilter;
 import org.grizz.service.EntryProvider;
 import org.grizz.statistics.collector.StatCollector;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatCollectorPool {
 	private List<StatCollector> statCollectors = new ArrayList<>();
@@ -38,8 +38,6 @@ public class StatCollectorPool {
 				for (StatCollector collector : statCollectors) {
 					collector.collect(entry);
 				}
-			} else {
-//				System.out.println("Duplicate found! ID: " + entry.getId());
 			}
 		}
 	}
