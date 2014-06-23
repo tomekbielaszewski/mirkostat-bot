@@ -28,14 +28,14 @@ public class StatSummaryPrinter implements StatPrinter {
 		int overallCharactersTyped = entryLengthCollector.getOverallLength();
 		int overallTagsUsed = tagCounter.getNumberOfTags();
 		
-		String mirekPlural = StringPlural.choose(new String[]{"Mirek** napisał","Mirki** napisały","Mirków** napisało"}, amountOfUsers);
-		String entryPlural = StringPlural.choose(new String[]{"wpis","wpisy","wpisów"}, amountOfEntries);
-		String characterPlural = StringPlural.choose(new String[]{"znak","znaki","znaków"}, overallCharactersTyped);
-		String tagPlural = StringPlural.choose(new String[]{"unikatowy tag","unikatowe tagi","unikatowych tagów"}, overallTagsUsed);
+		String mirekPlural = StringPlural.choose(new String[]{"Mirek** napisal","Mirki** napisaly","Mirkow** napisalo"}, amountOfUsers);
+		String entryPlural = StringPlural.choose(new String[]{"wpis","wpisy","wpisow"}, amountOfEntries);
+		String characterPlural = StringPlural.choose(new String[]{"znak","znaki","znakow"}, overallCharactersTyped);
+		String tagPlural = StringPlural.choose(new String[]{"unikatowy tag","unikatowe tagi","unikatowych tagow"}, overallTagsUsed);
 		
 		String summary = 
 			String.format("Przez ostatnie 24 godziny **%d %s **%d %s** "
-					+ "o łącznej długości **%d %s**. Użyto przy tym **%d %s**.",
+					+ "o lacznej dlugosci **%d %s**. Uzyto przy tym **%d %s**.",
 			amountOfUsers, mirekPlural, 
 			amountOfEntries, entryPlural,
 			overallCharactersTyped, characterPlural,
