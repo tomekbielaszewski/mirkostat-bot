@@ -2,6 +2,7 @@ package org.grizz;
 
 import org.grizz.output.Output;
 import org.grizz.output.StringOutput;
+import org.grizz.service.MicroblogService;
 import org.grizz.service.post.EntryPoster;
 import org.grizz.statistics.StatCollectorPool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class Starter {
     @Qualifier("mirkoEntryPoster")
 //    @Qualifier("systemOutEntryPoster")
     private EntryPoster entryPoster;
+    @Autowired
+    private MicroblogService microblogService;
 	
 	public static void main(String[] args) {
 		System.out.println("Application context is loading...");
@@ -38,6 +41,7 @@ public class Starter {
     }
 
     public String getMirkoStatBotEntryBody() {
+
         statCollectorPool.collect();
         statCollectorPool.printStats();
         statCollectorPool.reset();
@@ -50,6 +54,8 @@ public class Starter {
     }
 
     private void printMirkoStatBot(String mirkoStatBotEntryBody) {
+        microblogService.login();
         entryPoster.post(mirkoStatBotEntryBody);
+        microblogService.logout();
     }
 }

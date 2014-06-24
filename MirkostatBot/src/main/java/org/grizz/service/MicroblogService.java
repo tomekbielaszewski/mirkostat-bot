@@ -1,17 +1,21 @@
 package org.grizz.service;
 
+import com.google.gson.Gson;
+import org.apache.commons.lang3.Validate;
 import org.grizz.model.Entry;
+import org.grizz.model.UserKeyModel;
 import org.grizz.service.post.WykopUrlSigner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
 public class MicroblogService {
-	@Autowired
+    private final String accountKey;
+
+    @Autowired
 	private URLBuilder builder;
 	@Autowired
 	private HTTPRequestService requestService;
@@ -19,6 +23,12 @@ public class MicroblogService {
     private EntryFactory entryFactory;
     @Autowired
     private WykopUrlSigner signer;
+
+    private String userkey;
+
+    public MicroblogService(String accountKey) {
+        this.accountKey = accountKey;
+    }
 
     public Entry[] index() {
 		return index(1);
@@ -45,9 +55,11 @@ public class MicroblogService {
     }
 
     public String add(String entryBody) {
+        Validate.notNull(userkey);
+
         Map<String, String> postContent = new HashMap<>();
         Map<String, String> headers = new HashMap<>();
-        String url = builder.getMicroblogAddEntryURL();
+        String url = builder.getMicroblogAddEntryURL(userkey);
 
         postContent.put("body", entryBody);
 
@@ -56,5 +68,24 @@ public class MicroblogService {
 
     public Entry[] next(int entryId) {
         return next(Long.valueOf(entryId));
+    }
+
+    public void login() {
+        Map<String, String> postContent = new HashMap<>();
+        String url = builder.getWykopLoginURL();
+
+        postContent.put("accountkey", accountKey);
+
+        String json = requestService.sendPost(url, postContent, Collections.EMPTY_MAP);
+
+        Gson gson = new Gson();
+        UserKeyModel userKeyModel = gson.fromJson(json, UserKeyModel.class);
+        Validate.notNull(userKeyModel.getUserkey());
+
+        this.userkey = userKeyModel.getUserkey();
+    }
+
+    public void logout() {
+        userkey = null;
     }
 }
