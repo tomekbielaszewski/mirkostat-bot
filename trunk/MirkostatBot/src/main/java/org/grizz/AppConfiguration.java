@@ -1,11 +1,9 @@
 package org.grizz;
 
-import com.google.gson.Gson;
-import org.apache.commons.lang3.Validate;
-import org.grizz.model.UserKeyModel;
 import org.grizz.printer.*;
 import org.grizz.service.EntryProvider;
 import org.grizz.service.HTTPRequestService;
+import org.grizz.service.MicroblogService;
 import org.grizz.service.URLBuilder;
 import org.grizz.service.post.WykopUrlSigner;
 import org.grizz.statistics.StatCollectorPool;
@@ -14,10 +12,6 @@ import org.grizz.statistics.collector.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class AppConfiguration {
@@ -68,27 +62,15 @@ public class AppConfiguration {
     @Autowired
     private WykopUrlSigner signer;
 
+    @Bean
+    public MicroblogService microblogService() {
+        return new MicroblogService(ACCOUNT_KEY);
+    }
+
 	@Bean
 	public TagStatsPrinter tagStatsPrinter() {
 		return new TagStatsPrinter(AMOUNT_OF_TAG_STATS);
 	}
-
-    @Bean(name = "userKey")
-    public String userKey() {
-        URLBuilder urlBuilder = urlBuilder();
-        Map<String, String> postContent = new HashMap<>();
-        String url = urlBuilder.getWykopLoginURL();
-
-        postContent.put("accountkey", ACCOUNT_KEY);
-
-        String json = requestService.sendPost(url, postContent, Collections.EMPTY_MAP);
-
-        Gson gson = new Gson();
-        UserKeyModel userKeyModel = gson.fromJson(json, UserKeyModel.class);
-        Validate.notNull(userKeyModel.getUserkey());
-
-        return userKeyModel.getUserkey();
-    }
 
     @Bean
     public WykopUrlSigner wykopUrlSigner() {
