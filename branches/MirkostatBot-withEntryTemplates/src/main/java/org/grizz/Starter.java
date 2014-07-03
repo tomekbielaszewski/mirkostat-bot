@@ -4,12 +4,11 @@ import org.grizz.output.Output;
 import org.grizz.output.StringOutput;
 import org.grizz.service.MicroblogService;
 import org.grizz.service.post.EntryPoster;
+import org.grizz.springconfig.BaseConfig;
 import org.grizz.statistics.StatCollectorPool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +18,6 @@ public class Starter {
     @Autowired
     private Output output;
     @Autowired
-    @Qualifier("mirkoEntryPoster")
-//    @Qualifier("systemOutEntryPoster")
     private EntryPoster entryPoster;
     @Autowired
     private MicroblogService microblogService;
@@ -28,7 +25,7 @@ public class Starter {
 	public static void main(String[] args) {
 		System.out.println("Application context is loading...");
 		@SuppressWarnings("resource")
-		ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:META-INF/spring/applicationContext**.xml");
+		ApplicationContext context = new AnnotationConfigApplicationContext(BaseConfig.class);
 		System.out.println("Application context loading is done!");
 
 		context.getBean(Starter.class).run();

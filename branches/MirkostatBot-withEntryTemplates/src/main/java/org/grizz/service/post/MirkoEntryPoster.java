@@ -3,12 +3,10 @@ package org.grizz.service.post;
 
 import org.grizz.service.MicroblogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by Grizz on 2014-06-22.
  */
-@Service("mirkoEntryPoster")
 public class MirkoEntryPoster implements EntryPoster {
     @Autowired
     private MicroblogService microblogService;
