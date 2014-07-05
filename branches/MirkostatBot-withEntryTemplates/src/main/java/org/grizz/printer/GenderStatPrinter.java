@@ -1,0 +1,52 @@
+package org.grizz.printer;
+
+import org.apache.commons.lang3.StringUtils;
+import org.grizz.output.Output;
+import org.grizz.statistics.collector.GenderActivityCollector;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Grizz on 2014-07-05.
+ */
+@Service
+public class GenderStatPrinter implements StatPrinter {
+    @Autowired
+    private GenderActivityCollector genderActivityCollector;
+
+    @Override
+    public void print(Output output) {
+        int numberOfGenders = genderActivityCollector.getNumberOfGenders();
+        ArrayList<String> parameters = new ArrayList<>();
+
+        for (int i = 0; i < numberOfGenders; i++) {
+            if(StringUtils.isNotEmpty(genderActivityCollector.getGenderOnPosition(i))) {
+                switch(genderActivityCollector.getGenderOnPosition(i)) {
+                    case "male" : parameters.add("Niebieskiepaski"); break;
+                    case "female" : parameters.add("Rozowepaski"); break;
+                }
+                parameters.add(String.valueOf(genderActivityCollector.getGenderCountOnPosition(i)));
+            }
+        }
+
+        output.append(String.format(template(numberOfGenders), parameters.toArray()));
+    }
+
+    private String template(int numberOfGenders) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Aktywnosc niebieskich i rozowych paskow:\n");
+
+        for (int i = 0; i < numberOfGenders; i++) {
+            if(StringUtils.isNotEmpty(genderActivityCollector.getGenderOnPosition(i))) {
+                builder.append((i>=9?"":"0")+(i+1)+". %s x%s\n");
+            }
+        }
+
+        builder.append("\n");
+
+        return builder.toString();
+    }
+}

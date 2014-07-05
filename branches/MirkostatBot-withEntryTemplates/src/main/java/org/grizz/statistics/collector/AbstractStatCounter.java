@@ -1,13 +1,7 @@
 package org.grizz.statistics.collector;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 public abstract class AbstractStatCounter implements StatCollector {
 	private static Map.Entry<Object, Integer> EMPTY_ENTRY;
@@ -66,7 +60,11 @@ public abstract class AbstractStatCounter implements StatCollector {
 		return sortedEntries.get(position);
 	}
 
-	private void updateMap(Object obj, Integer value, Map<Object, Integer> map){
+    protected Map<Object, Integer> getCounter() {
+        return counter;
+    }
+
+    private void updateMap(Object obj, Integer value, Map<Object, Integer> map){
 		if(map.containsKey(obj)) {
 			Integer i = map.get(obj);
 			i += value;

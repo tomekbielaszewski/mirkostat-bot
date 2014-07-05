@@ -19,7 +19,7 @@ public class UserEntriesStatPrinter implements StatPrinter {
 		String template = "Najczesciej piszacy uzytkownicy ostatnich 24 godzin:\n";
 
 		for (int i = 1; i <= amountOfStats; i++) {
-			template += i+". @%s: %d %s";
+			template += (i<=9?"0":"")+i+". @%s: %d %s";
 			if(i < amountOfStats) {
 				template += "\n";
 			}

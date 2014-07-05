@@ -43,6 +43,20 @@ public class BaseConfig {
     private TotalVoteCollector totalVoteCollector;
     @Autowired
     private MostActiveUser mostActiveUser;
+    @Autowired
+    private UserAppCounter userAppCounter;
+    @Autowired
+    private EntryCommentCounter entryCommentCounter;
+    @Autowired
+    private VoteCounter voteCounter;
+    @Autowired
+    private UntaggedEntriesCounter untaggedEntriesCounter;
+    @Autowired
+    private GenderActivityCollector genderActivityCollector;
+    @Autowired
+    private UsersNotTaggingCounter usersNotTaggingCounter;
+    @Autowired
+    private UserGroupActivityCollector userGroupActivityCollector;
 
     @Autowired
     private SeparatorPrinter separatorPrinter;
@@ -58,6 +72,12 @@ public class BaseConfig {
     private BestVotedUsersPrinter bestVotedUsersPrinter;
     @Autowired
     private MostActiveUserPrinter mostActiveUserPrinter;
+    @Autowired
+    private UserAppsPrinter userAppsPrinter;
+    @Autowired
+    private GenderStatPrinter genderStatPrinter;
+    @Autowired
+    private UserGroupStatPrinter userGroupStatPrinter;
 
     @Bean
     public MicroblogService microblogService() {
@@ -96,7 +116,14 @@ public class BaseConfig {
                 userEntryCounter,
                 userTypedCharactersCounter,
                 totalVoteCollector,
-                mostActiveUser
+                mostActiveUser,
+                userAppCounter,
+                entryCommentCounter,
+                voteCounter,
+                untaggedEntriesCounter,
+                usersNotTaggingCounter,
+                genderActivityCollector,
+                userGroupActivityCollector
         };
 
         //printers order is important
@@ -111,9 +138,15 @@ public class BaseConfig {
                 separatorPrinter,
                 userCharactersStatPrinter,
                 separatorPrinter,
+                genderStatPrinter,
+                separatorPrinter,
+                userGroupStatPrinter,
+                separatorPrinter,
+                userAppsPrinter,
+                separatorPrinter,
                 statSummaryPrinter,
                 separatorPrinter,
-                applicationTagPrinter
+                applicationTagPrinter,
         };
 
         return factory.create(collectors, printers);

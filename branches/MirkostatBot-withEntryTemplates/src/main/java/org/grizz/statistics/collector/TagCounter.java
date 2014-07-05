@@ -1,13 +1,14 @@
 package org.grizz.statistics.collector;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.grizz.model.Entry;
+import org.grizz.model.EntryComment;
 import org.grizz.model.Tag;
 import org.grizz.service.TagExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class TagCounter implements StatCollector {
@@ -22,7 +23,14 @@ public class TagCounter implements StatCollector {
 		for (Tag tag : extractedTags) {
 			tags.add(tag);
 		}
-	}
+
+        for (EntryComment entryComment : entry.getComments()) {
+            Set<Tag> extractedTagsFromComment = tagExtractor.extract(entryComment.getBody());
+            for (Tag tag : extractedTagsFromComment) {
+                tags.add(tag);
+            }
+        }
+    }
 
 	@Override
 	public void reset() {
