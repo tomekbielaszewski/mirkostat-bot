@@ -1,5 +1,6 @@
 package org.grizz.printer;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grizz.output.Output;
 import org.grizz.statistics.collector.UserAppCounter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UserAppsPrinter implements StatPrinter {
     private String[] getUserApps(int numberOfApps) {
         String[] userApps = new String[numberOfApps * 2];
         for (int i = 0; i < numberOfApps * 2; i += 2) {
-            userApps[i] = userAppCounter.getAppOnPosition(i/2);
+            userApps[i] = StringUtils.stripAccents(userAppCounter.getAppOnPosition(i/2)).replaceAll("ł","l");
             userApps[i+1] = String.valueOf(userAppCounter.getAppCountOnPosition(i/2));
         }
         return userApps;
