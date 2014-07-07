@@ -1,5 +1,6 @@
 package org.grizz.printer;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grizz.model.EntryComment;
 import org.grizz.output.Output;
 import org.grizz.statistics.collector.CommentRankingCounter;
@@ -32,7 +33,7 @@ public class CommentRankingPrinter implements StatPrinter {
 			
 			statistics[i] = getUrl(comment);
 			statistics[i+1] = comment.getVotes();
-			statistics[i+2] = shortBody(comment);
+			statistics[i+2] = removePolishCharacters(shortBody(comment));
 		}
 		String formattedStatistics = String.format(template, statistics);
 		
@@ -47,12 +48,16 @@ public class CommentRankingPrinter implements StatPrinter {
 
     private String shortBody(EntryComment comment) {
         String body = comment.getBody()
-                .replaceAll("@", "＠")
+                .replaceAll("@", "@|")
                 .replaceAll("#", "#|");
 
         return body.length() > 50 ?
                 body.substring(0, 50).trim() + "..." :
                 body;
+    }
+
+    private String removePolishCharacters(String txt) {
+        return StringUtils.stripAccents(txt).replaceAll("ł","l");
     }
 
 }
