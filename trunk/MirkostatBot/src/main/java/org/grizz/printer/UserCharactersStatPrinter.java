@@ -13,13 +13,13 @@ public class UserCharactersStatPrinter implements StatPrinter {
 
 	@Override
 	public void print(Output output) {
-		int amountOfStats = 3;
+		int amountOfStats = 5;
 		String[] charactersPlurals = new String[]{"znak","znaki","znakow"};
 		
-		String template = "Najwiecej piszacy uzytkownicy ostatnich 24 godzin:\n";
+		String template = "Najwiecej piszacy uzytkownicy:\n";
 
 		for (int i = 1; i <= amountOfStats; i++) {
-			template += i+". @%s: %d %s";
+			template += (i<=9?"0":"")+i+". @%s: %d %s";
 			if(i < amountOfStats) {
 				template += "\n";
 			}

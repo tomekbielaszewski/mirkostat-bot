@@ -1,8 +1,9 @@
 package org.grizz.model;
-import java.util.Date;
-import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Date;
+import java.util.List;
 
 public class Entry implements Identifable {
 
@@ -11,10 +12,17 @@ public class Entry implements Identifable {
     private String author;
 
     @SerializedName("author_group")
-    private String authorGroup;
+    private int authorGroup;
+
+    @SerializedName("author_sex")
+    private String authorSex;
+
+    private String app;
 
     @SerializedName("date")
     private Date dateAdded;
+
+    private Embed embed;
 
     private String body;
 
@@ -43,11 +51,11 @@ public class Entry implements Identifable {
 		this.author = author;
 	}
 
-	public String getAuthorGroup() {
+	public int getAuthorGroup() {
 		return authorGroup;
 	}
 
-	public void setAuthorGroup(String authorGroup) {
+	public void setAuthorGroup(int authorGroup) {
 		this.authorGroup = authorGroup;
 	}
 
@@ -99,7 +107,31 @@ public class Entry implements Identifable {
 		this.voters = voters;
 	}
 
-	@Override
+    public String getApp() {
+        return app;
+    }
+
+    public void setApp(String app) {
+        this.app = app;
+    }
+
+    public String getAuthorSex() {
+        return authorSex;
+    }
+
+    public void setAuthorSex(String authorSex) {
+        this.authorSex = authorSex;
+    }
+
+    public Embed getEmbed() {
+        return embed;
+    }
+
+    public void setEmbed(Embed embed) {
+        this.embed = embed;
+    }
+
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

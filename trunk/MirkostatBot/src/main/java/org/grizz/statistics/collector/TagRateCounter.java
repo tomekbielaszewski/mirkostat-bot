@@ -1,15 +1,14 @@
 package org.grizz.statistics.collector;
 
-import java.util.Set;
-
 import org.grizz.model.Entry;
 import org.grizz.model.Tag;
 import org.grizz.service.TagExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
-//@Scope("prototype")
 public class TagRateCounter extends AbstractStatCounter {
 	@Autowired
 	private TagExtractor tagExtractor;
@@ -20,7 +19,7 @@ public class TagRateCounter extends AbstractStatCounter {
 		for (Tag tag : tags) {
 			addToCounter(tag.getName(), 1);
 		}
-	}
+    }
 	
 	public int getTagRate(int position) {
 		return getEntryOnPosition(position).getValue();
