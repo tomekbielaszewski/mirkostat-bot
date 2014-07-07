@@ -9,9 +9,12 @@ import org.grizz.statistics.StatCollectorPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
+@EnableScheduling
 public class Starter {
 	@Autowired
 	private StatCollectorPool statCollectorPool;
@@ -28,10 +31,10 @@ public class Starter {
 		ApplicationContext context = new AnnotationConfigApplicationContext(BaseConfig.class);
 		System.out.println("Application context loading is done!");
 
-		context.getBean(Starter.class).run();
+//		context.getBean(Starter.class).run();
     }
 
-//    @Scheduled(cron = "* 00 17 * * *")
+    @Scheduled(cron = "* 00 17 * * *")
 	public void run() {
         String mirkoStatBotEntryBody = getMirkoStatBotEntryBody();
         printMirkoStatBot(mirkoStatBotEntryBody);

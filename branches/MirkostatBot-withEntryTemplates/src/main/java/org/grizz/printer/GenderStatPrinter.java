@@ -23,11 +23,13 @@ public class GenderStatPrinter implements StatPrinter {
 
         for (int i = 0; i < numberOfGenders; i++) {
             if(StringUtils.isNotEmpty(genderActivityCollector.getGenderOnPosition(i))) {
+                int genderCount = genderActivityCollector.getGenderCountOnPosition(i);
+
                 switch(genderActivityCollector.getGenderOnPosition(i)) {
                     case "male" : parameters.add("Niebieskiepaski"); break;
                     case "female" : parameters.add("Rozowepaski"); break;
                 }
-                parameters.add(String.valueOf(genderActivityCollector.getGenderCountOnPosition(i)));
+                parameters.add(String.valueOf(genderCount));
             }
         }
 

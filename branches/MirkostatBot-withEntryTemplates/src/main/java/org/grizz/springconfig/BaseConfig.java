@@ -23,7 +23,6 @@ public class BaseConfig {
     private static final String APP_KEY = "TPJl24Jc5J";
     private static final String SECRET_KEY = "mo4JG9Ed4E";
     private static final String ACCOUNT_KEY = "Ypbaxw0FUUtS4swAvxpI";
-    private static final int AMOUNT_OF_TAG_STATS = 10;
 
     @Autowired
     private EntryCounter entryCounter;
@@ -57,6 +56,14 @@ public class BaseConfig {
     private UsersNotTaggingCounter usersNotTaggingCounter;
     @Autowired
     private UserGroupActivityCollector userGroupActivityCollector;
+    @Autowired
+    private EmbedCounter embedCounter;
+    @Autowired
+    private UserCommentsCounter userCommentsCounter;
+    @Autowired
+    private CommentRankingCounter commentRankingCounter;
+    @Autowired
+    private ImageRankingCounter imageRankingCounter;
 
     @Autowired
     private SeparatorPrinter separatorPrinter;
@@ -69,6 +76,8 @@ public class BaseConfig {
     @Autowired
     private ApplicationTagPrinter applicationTagPrinter;
     @Autowired
+    private SignPrinter signPrinter;
+    @Autowired
     private BestVotedUsersPrinter bestVotedUsersPrinter;
     @Autowired
     private MostActiveUserPrinter mostActiveUserPrinter;
@@ -78,15 +87,20 @@ public class BaseConfig {
     private GenderStatPrinter genderStatPrinter;
     @Autowired
     private UserGroupStatPrinter userGroupStatPrinter;
+    @Autowired
+    private EmbedCountStatPrinter embedCountStatPrinter;
+    @Autowired
+    private UserCommentsStatPrinter userCommentsStatPrinter;
+    @Autowired
+    private TagRankingPrinter tagRankingPrinter;
+    @Autowired
+    private CommentRankingPrinter commentRankingPrinter;
+    @Autowired
+    private ImageRankingPrinter imageRankingPrinter;
 
     @Bean
     public MicroblogService microblogService() {
         return new MicroblogService(ACCOUNT_KEY);
-    }
-
-    @Bean
-    public TagStatsPrinter tagStatsPrinter() {
-        return new TagStatsPrinter(AMOUNT_OF_TAG_STATS);
     }
 
     @Bean
@@ -123,12 +137,22 @@ public class BaseConfig {
                 untaggedEntriesCounter,
                 usersNotTaggingCounter,
                 genderActivityCollector,
-                userGroupActivityCollector
+                userGroupActivityCollector,
+                embedCounter,
+                userCommentsCounter,
+                commentRankingCounter,
+                imageRankingCounter
         };
 
         //printers order is important
         StatPrinter[] printers = new StatPrinter[]{
-                tagStatsPrinter(),
+                applicationTagPrinter,
+                separatorPrinter,
+                tagRankingPrinter,
+                separatorPrinter,
+                commentRankingPrinter,
+                separatorPrinter,
+                imageRankingPrinter,
                 separatorPrinter,
                 bestVotedUsersPrinter,
                 separatorPrinter,
@@ -138,15 +162,19 @@ public class BaseConfig {
                 separatorPrinter,
                 userCharactersStatPrinter,
                 separatorPrinter,
+                userCommentsStatPrinter,
+                separatorPrinter,
                 genderStatPrinter,
                 separatorPrinter,
                 userGroupStatPrinter,
                 separatorPrinter,
                 userAppsPrinter,
                 separatorPrinter,
+                embedCountStatPrinter,
+                separatorPrinter,
                 statSummaryPrinter,
                 separatorPrinter,
-                applicationTagPrinter,
+                signPrinter
         };
 
         return factory.create(collectors, printers);

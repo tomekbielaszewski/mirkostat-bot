@@ -25,7 +25,7 @@ public class UserGroupStatPrinter implements StatPrinter {
                 case GREEN: parameters.add("Zielonki"); break;
                 case ORANGE: parameters.add("Pomaranczki"); break;
                 case RED: parameters.add("Bordo"); break;
-                case BLACK: parameters.add("Admin"); break;
+                case BLACK: parameters.add("Admini"); break;
                 case BLUE: parameters.add("Sponsorowani"); break;
                 case SILVER: parameters.add("Srebro"); break;
                 case DELETED: parameters.add("Emoquit"); break;

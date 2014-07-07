@@ -4,22 +4,20 @@ import org.grizz.output.Output;
 import org.grizz.statistics.collector.EntryCounter;
 import org.grizz.statistics.collector.TagRateCounter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class TagStatsPrinter implements StatPrinter {
+@Service
+public class TagRankingPrinter implements StatPrinter {
 	@Autowired
 	private TagRateCounter tagRateCounter;
     @Autowired
     private EntryCounter entryCounter;
 
-	private final int amountOfStats;
-	
-	public TagStatsPrinter(int amountOfStats) {
-		this.amountOfStats = amountOfStats;
-	}
+	private final int amountOfStats = 10;
 
 	@Override
 	public void print(Output output) {
-		String template = "Najpopularniejsze tagi ostatnich 24 godzin:\n";
+		String template = "Ranking najpopularniejszych tagow:\n";
         int amountOfEntries = entryCounter.getNumberOfEntries();
 
 		for (int i = 1; i <= amountOfStats; i++) {

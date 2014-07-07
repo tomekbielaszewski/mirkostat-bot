@@ -17,8 +17,12 @@ public class Entry implements Identifable {
     @SerializedName("author_sex")
     private String authorSex;
 
+    private String app;
+
     @SerializedName("date")
     private Date dateAdded;
+
+    private Embed embed;
 
     private String body;
 
@@ -30,8 +34,6 @@ public class Entry implements Identifable {
     private List<EntryComment> comments;
     
     private List<User> voters;
-
-    private String app;
 
 	public Long getId() {
 		return id;
@@ -119,6 +121,14 @@ public class Entry implements Identifable {
 
     public void setAuthorSex(String authorSex) {
         this.authorSex = authorSex;
+    }
+
+    public Embed getEmbed() {
+        return embed;
+    }
+
+    public void setEmbed(Embed embed) {
+        this.embed = embed;
     }
 
     @Override

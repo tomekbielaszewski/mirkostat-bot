@@ -1,22 +1,22 @@
 package org.grizz.printer;
 
 import org.grizz.output.Output;
-import org.grizz.statistics.collector.UserTypedCharactersCounter;
+import org.grizz.statistics.collector.UserCommentsCounter;
 import org.grizz.utils.StringPlural;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserCharactersStatPrinter implements StatPrinter {
+public class UserCommentsStatPrinter implements StatPrinter {
 	@Autowired
-	private UserTypedCharactersCounter charactersCounter;
+	private UserCommentsCounter userCommentsCounter;
 
 	@Override
 	public void print(Output output) {
 		int amountOfStats = 5;
-		String[] charactersPlurals = new String[]{"znak","znaki","znakow"};
+		String[] commentPlurals = new String[]{"komentarz","komentarze","komentarzy"};
 		
-		String template = "Najwiecej piszacy uzytkownicy:\n";
+		String template = "Najwiecej komentujacy uzytkownicy:\n";
 
 		for (int i = 1; i <= amountOfStats; i++) {
 			template += (i<=9?"0":"")+i+". @%s: %d %s";
@@ -29,17 +29,18 @@ public class UserCharactersStatPrinter implements StatPrinter {
 
 		for (int i = 0; i < amountOfStats*3; i += 3) {
             int index = i/3;
-			statistics[i] = charactersCounter.getUserTypedCharactersRate(index);
-			int amountOfCharacters = charactersCounter.getTypedCharactersRate(index);
+			statistics[i] = userCommentsCounter.getUserOnPosition(index);
+			int amountOfComments = userCommentsCounter.getUserCountOnPosition(index);
 			
-			statistics[i+1] = amountOfCharacters;
-			statistics[i+2] = StringPlural.choose(charactersPlurals, amountOfCharacters);
+			statistics[i+1] = amountOfComments;
+			statistics[i+2] = StringPlural.choose(commentPlurals, amountOfComments);
 		}
 		
 		String formattedStatistics = String.format(template, statistics);
 		
 		output.append(formattedStatistics);
 		output.append("\n\n");
+	
 	}
 
 }
