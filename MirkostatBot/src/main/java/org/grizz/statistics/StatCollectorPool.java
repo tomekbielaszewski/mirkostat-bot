@@ -4,7 +4,7 @@ import org.grizz.model.Entry;
 import org.grizz.output.Output;
 import org.grizz.printer.StatPrinter;
 import org.grizz.service.DuplicateFilter;
-import org.grizz.service.EntryProvider;
+import org.grizz.service.provider.EntryProvider;
 import org.grizz.statistics.collector.StatCollector;
 import org.springframework.beans.factory.annotation.Autowired;
 

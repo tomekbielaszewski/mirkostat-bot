@@ -4,8 +4,8 @@
     <groupId>org.grizz</groupId>
     <artifactId>Mirkostatbot</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.5.BUILD-SNAPSHOT</version>
-    <name>Tagger</name>
+    <version>1.5.0.BUILD-SNAPSHOT</version>
+    <name>Mirkostatbot</name>
 
     <properties>
         <aspectj.version>1.7.2</aspectj.version>

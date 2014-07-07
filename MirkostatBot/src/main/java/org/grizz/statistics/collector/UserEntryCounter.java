@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserEntryCounter extends AbstractStatCounter {
-	
+
 	@Override
 	public void collect(Entry entry) {
 		addToCounter(entry.getAuthor(), 1);
