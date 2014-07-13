@@ -57,7 +57,9 @@ public class CommentRankingPrinter implements StatPrinter {
     }
 
     private String removePolishCharacters(String txt) {
-        return StringUtils.stripAccents(txt).replaceAll("ł","l");
+        return StringUtils.stripAccents(txt)
+                .replaceAll("ł","l")
+                .replaceAll("Ł","L");
     }
 
 }
