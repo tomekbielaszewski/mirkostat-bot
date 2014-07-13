@@ -15,8 +15,8 @@ public class ImageRankingCounter extends AbstractStatCounter {
         }
 
         for (EntryComment entryComment : entry.getComments()) {
-            if(isImagePresent(entry)) {
-                addToCounter(entry, entryComment.getVotes());
+            if(isImagePresent(entryComment)) {
+                addToCounter(entryComment, entryComment.getVotes());
             }
         }
     }

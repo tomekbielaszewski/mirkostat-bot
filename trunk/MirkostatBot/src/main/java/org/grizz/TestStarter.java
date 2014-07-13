@@ -1,5 +1,6 @@
 package org.grizz;
 
+import org.grizz.service.HTTPRequestService;
 import org.grizz.service.MicroblogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class TestStarter {
 
     @Autowired
-    private MicroblogService microblog;
+    private HTTPRequestService requestService;
 
     public static void main(String[] args) {
         System.out.println("Application context is loading...");
@@ -25,6 +26,6 @@ public class TestStarter {
     }
 
     private void run() {
-        System.out.println(microblog.add("Dd\nDd\n\nś\n\n\nDd"));
+        System.out.println(requestService.sendGet("http://a.wykop.pl/tag/index/gfy/appkey/TPJl24Jc5J"));
     }
 }
