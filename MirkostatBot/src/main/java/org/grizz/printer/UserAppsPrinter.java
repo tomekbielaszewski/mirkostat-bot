@@ -23,12 +23,15 @@ public class UserAppsPrinter implements StatPrinter {
     }
 
     private String[] getUserApps(int numberOfApps) {
-        String[] userApps = new String[numberOfApps * 2];
-        for (int i = 0; i < numberOfApps * 2; i += 2) {
-            userApps[i] = StringUtils.stripAccents(userAppCounter.getAppOnPosition(i/2))
+        int params = 2;
+        String[] userApps = new String[numberOfApps * params];
+
+        for (int i = 0; i < numberOfApps * params; i += params) {
+            int index = i/params;
+            userApps[i] = StringUtils.stripAccents(userAppCounter.getAppOnPosition(index))
                     .replaceAll("ł","l")
                     .replaceAll("Ł","L");
-            userApps[i+1] = String.valueOf(userAppCounter.getAppCountOnPosition(i/2));
+            userApps[i+1] = String.valueOf(userAppCounter.getAppCountOnPosition(index));
         }
         return userApps;
     }

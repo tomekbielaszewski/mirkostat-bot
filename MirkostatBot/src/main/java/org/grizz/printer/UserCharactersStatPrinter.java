@@ -24,11 +24,12 @@ public class UserCharactersStatPrinter implements StatPrinter {
 				template += "\n";
 			}
 		}
-		
-		Object[] statistics = new Object[amountOfStats * 3];
 
-		for (int i = 0; i < amountOfStats*3; i += 3) {
-            int index = i/3;
+        int params = 3;
+		Object[] statistics = new Object[amountOfStats * params];
+
+		for (int i = 0; i < amountOfStats*params; i += params) {
+            int index = i/params;
 			statistics[i] = charactersCounter.getUserTypedCharactersRate(index);
 			int amountOfCharacters = charactersCounter.getTypedCharactersRate(index);
 			

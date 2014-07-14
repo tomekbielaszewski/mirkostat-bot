@@ -22,21 +22,24 @@ public class ImageRankingPrinter implements StatPrinter {
         String template = "Ranking najlepszych obrazkow:\n";
 
         for (int i = 1; i <= amountOfStats; i++) {
-            template += (i < 10 ? "0" : "") + i + ". [(#)](%s) | [(IMG)](%s) **+%d**";
+            template += (i < 10 ? "0" : "") + i + ". [(#)](%s) | [(IMG)](%s) **+%d** %s: @%s";
             if(i < amountOfStats) {
                 template += "\n";
             }
         }
 
-        Object[] statistics = new Object[amountOfStats * 3];
+        int params = 5;
+        Object[] statistics = new Object[amountOfStats * params];
 
-        for (int i = 0; i < amountOfStats*3; i += 3) {
-            int index = i/3;
+        for (int i = 0; i < amountOfStats*params; i += params) {
+            int index = i/params;
             Entry entry = imageRankingCounter.getImageOnPosition(index);
 
             statistics[i] = getEntryUrl(entry);
             statistics[i+1] = getImageUrl(entry);
             statistics[i+2] = entry.getVotes();
+            statistics[i+3] = getWordBySex(entry.getAuthorSex(), "Wstawil", "Wstawila");
+            statistics[i+4] = entry.getAuthor();
         }
         String formattedStatistics = String.format(template, statistics);
 
@@ -65,5 +68,9 @@ public class ImageRankingPrinter implements StatPrinter {
     private String getEntryCommentUrl(int entryId, Long commentId) {
         String template = "http://www.wykop.pl/wpis/%d/#comment-%d";
         return String.format(template, entryId, commentId);
+    }
+
+    private String getWordBySex(String sex, String male, String female) {
+        return sex == null || sex.equals("male") ? male : female;
     }
 }
