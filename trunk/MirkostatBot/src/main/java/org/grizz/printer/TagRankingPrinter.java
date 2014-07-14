@@ -26,11 +26,12 @@ public class TagRankingPrinter implements StatPrinter {
 				template += "\n";
 			}
 		}
-		
-		Object[] statistics = new Object[amountOfStats * 4];
 
-		for (int i = 0; i < amountOfStats*4; i += 4) {
-            int index = i/4;
+        int params = 4;
+		Object[] statistics = new Object[amountOfStats * params];
+
+		for (int i = 0; i < amountOfStats*params; i += params) {
+            int index = i/params;
 			String tag = tagRateCounter.getTag(index);
 			tag = tag.substring(1);
             int percent = (int)(((float)tagRateCounter.getTagRate(index) / (float)amountOfEntries) * 100);
