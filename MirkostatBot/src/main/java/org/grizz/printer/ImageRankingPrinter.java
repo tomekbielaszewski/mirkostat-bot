@@ -1,5 +1,6 @@
 package org.grizz.printer;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grizz.model.Entry;
 import org.grizz.model.EntryComment;
 import org.grizz.output.Output;
@@ -71,6 +72,6 @@ public class ImageRankingPrinter implements StatPrinter {
     }
 
     private String getWordBySex(String sex, String male, String female) {
-        return sex == null || sex.equals("male") ? male : female;
+        return StringUtils.isEmpty(sex) || sex.equals("male") ? male : female;
     }
 }
