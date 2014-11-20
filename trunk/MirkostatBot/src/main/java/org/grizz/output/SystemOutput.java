@@ -1,9 +1,10 @@
 package org.grizz.output;
 
-import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 
 //@Service
 public class SystemOutput implements Output {
+    private final Logger logger = Logger.getLogger(this.getClass());
 	private StringBuilder stringBuilder = new StringBuilder();
 
 	@Override
@@ -13,7 +14,7 @@ public class SystemOutput implements Output {
 
 	@Override
 	public void flush() {
-		System.out.println(stringBuilder.toString());
+		logger.info(stringBuilder.toString());
 		stringBuilder = new StringBuilder();
 	}
 

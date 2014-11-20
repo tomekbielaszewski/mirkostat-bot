@@ -1,5 +1,6 @@
 package org.grizz.service.provider;
 
+import org.apache.log4j.Logger;
 import org.grizz.model.Entry;
 import org.grizz.service.EntryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.List;
  * Created by Grizz on 2014-07-03.
  */
 public class DevEntryProvider implements EntryProvider {
+    private final Logger logger = Logger.getLogger(this.getClass());
+
     @Autowired
     ApplicationContext ctx;
     @Autowired
@@ -29,7 +32,7 @@ public class DevEntryProvider implements EntryProvider {
         List<Entry> entries = new ArrayList<>();
         int counter = 1;
 
-        System.out.println("Reading file...");
+        logger.info("Reading file...");
 
         try {
             jsonLines = Files.readAllLines(Paths.get("testEntries.json"), Charset.defaultCharset());
@@ -38,13 +41,13 @@ public class DevEntryProvider implements EntryProvider {
         }
 
         for (String jsonLine : jsonLines) {
-            System.out.println("Building entries... page " + (counter++));
+            logger.info("Building entries... page " + (counter++));
 
             Entry[] entriesArr = entryFactory.getEntries(jsonLine);
             entries.addAll(Arrays.asList(entriesArr));
         }
 
-        System.out.println("Loaded!\n");
+        logger.info("Loaded!\n");
 
         return entries;
     }

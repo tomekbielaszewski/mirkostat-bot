@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class SignPrinter implements StatPrinter {
     @Override
     public void print(Output output) {
-        output.append("by @Grizwold");
+        output.append("by @Grizwold\n");
+        output.append("Sprawdz tez #mirkoonlinebot'a! Licznik aktywnych Mirkow!");
     }
 }
