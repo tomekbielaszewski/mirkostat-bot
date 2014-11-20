@@ -4,7 +4,7 @@
     <groupId>org.grizz</groupId>
     <artifactId>Mirkostatbot</artifactId>
     <packaging>jar</packaging>
-    <version>1.5.2.BUILD-SNAPSHOT</version>
+    <version>1.5.3.BUILD-SNAPSHOT</version>
     <name>Mirkostatbot</name>
 
     <properties>
@@ -48,7 +48,7 @@
         <dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.2.4</version>
+			<version>2.3</version>
 		</dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

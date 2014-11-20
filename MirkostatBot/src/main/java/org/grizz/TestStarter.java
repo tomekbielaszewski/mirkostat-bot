@@ -1,7 +1,7 @@
 package org.grizz;
 
+import org.apache.log4j.Logger;
 import org.grizz.service.HTTPRequestService;
-import org.grizz.service.MicroblogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,20 +12,23 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestStarter {
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
     private HTTPRequestService requestService;
 
     public static void main(String[] args) {
-        System.out.println("Application context is loading...");
+        Logger logger = Logger.getLogger(TestStarter.class);
+
+        logger.info("Application context is loading...");
         @SuppressWarnings("resource")
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:META-INF/spring/applicationContext**.xml");
-        System.out.println("Application context loading is done!");
+        logger.info("Application context loading is done!");
 
         context.getBean(TestStarter.class).run();
     }
 
     private void run() {
-        System.out.println(requestService.sendGet("http://a.wykop.pl/tag/index/gfy/appkey/TPJl24Jc5J"));
+        logger.info(requestService.sendGet("http://a.wykop.pl/tag/index/gfy/appkey/TPJl24Jc5J"));
     }
 }

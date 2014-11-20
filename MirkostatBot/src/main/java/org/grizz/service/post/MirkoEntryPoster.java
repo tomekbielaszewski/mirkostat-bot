@@ -1,6 +1,7 @@
 package org.grizz.service.post;
 
 
+import org.apache.log4j.Logger;
 import org.grizz.service.MicroblogService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,16 +11,18 @@ import java.util.Date;
  * Created by Grizz on 2014-06-22.
  */
 public class MirkoEntryPoster implements EntryPoster {
+    private final Logger logger = Logger.getLogger(this.getClass());
+
     @Autowired
     private MicroblogService microblogService;
 
     @Override
     public void post(String mirkoStatBotEntryBody) {
-        System.out.println("Posting new entry...");
-        System.out.println(new Date());
+        logger.info("Posting new entry...");
+        logger.info(new Date().toString());
 
         String result = microblogService.add(mirkoStatBotEntryBody);
 
-        System.out.println("Result:\n" + result);
+        logger.info("Result:\n" + result);
     }
 }
