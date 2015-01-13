@@ -12,8 +12,8 @@ public class MostActiveUserPrinter implements StatPrinter {
 
 	@Override
 	public void print(Output output) {
-		String s = String.format("Najaktywniejszy Mirek to @%s! Laczna liczba wykonanych przez niego akcji* to **%d** \n" +
-                "! * - suma z liczby napisanych wpisow i komentarzy jak i liczby podarowanych plusow",
+		String s = String.format("Najaktywniejszy Mirek to @%s! Łączna liczba wykonanych przez niego akcji* to **%d** \n" +
+                "! * - suma z liczby napisanych wpisów i komentarzy jak i liczby podarowanych plusów",
                 mostActiveUser.getMostActiveUser(),
                 mostActiveUser.getNumberOfActions());
 		output.append(s + "\n\n");

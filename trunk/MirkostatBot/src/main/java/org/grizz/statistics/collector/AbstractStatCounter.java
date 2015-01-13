@@ -56,8 +56,14 @@ public abstract class AbstractStatCounter implements StatCollector {
 		};
 		sortedEntries.addAll(entries);
 		Collections.sort(sortedEntries, entryComparator);
-		
-		return sortedEntries.get(position);
+
+        if(sortedEntries.size() > position) {
+            return sortedEntries.get(position);
+        } else {
+            HashMap<Object, Integer> map = new HashMap<Object, Integer>();
+            map.put("",0);
+            return map.entrySet().iterator().next();
+        }
 	}
 
     protected Map<Object, Integer> getCounter() {

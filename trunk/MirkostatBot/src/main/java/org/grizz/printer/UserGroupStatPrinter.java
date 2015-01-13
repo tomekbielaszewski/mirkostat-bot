@@ -23,7 +23,7 @@ public class UserGroupStatPrinter implements StatPrinter {
         for (int i = 0; i < numberOfGenders; i++) {
             switch(userGroupActivityCollector.getUserGroupOnPosition(i)) {
                 case GREEN: parameters.add("Zielonki"); break;
-                case ORANGE: parameters.add("Pomaranczki"); break;
+                case ORANGE: parameters.add("Pomarańczki"); break;
                 case RED: parameters.add("Bordo"); break;
                 case BLACK: parameters.add("Admini"); break;
                 case BLUE: parameters.add("Sponsorowani"); break;
@@ -39,7 +39,7 @@ public class UserGroupStatPrinter implements StatPrinter {
     private String template(int numberOfGenders) {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Aktywnosc grup uzytkownikow:\n");
+        builder.append("Aktywność grup użytkowników:\n");
 
         for (int i = 0; i < numberOfGenders; i++) {
             builder.append((i>=9?"":"0")+(i+1)+". %s x%s\n");

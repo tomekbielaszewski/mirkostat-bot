@@ -21,8 +21,8 @@ public class MirkoEntryPoster implements EntryPoster {
         logger.info("Posting new entry...");
         logger.info(new Date().toString());
 
-        String result = microblogService.add(mirkoStatBotEntryBody);
+        Integer entryId = microblogService.add(mirkoStatBotEntryBody);
 
-        logger.info("Result:\n" + result);
+        logger.info("Entry ID: " + entryId);
     }
 }

@@ -14,9 +14,9 @@ public class UserEntriesStatPrinter implements StatPrinter {
 	@Override
 	public void print(Output output) {
 		int amountOfStats = 5;
-		String[] entriesPlurals = new String[]{"wpis","wpisy","wpisow"};
+		String[] entriesPlurals = new String[]{"wpis","wpisy","wpisów"};
 		
-		String template = "Najczesciej piszacy uzytkownicy:\n";
+		String template = "Najczęsciej piszący użytkownicy:\n";
 
 		for (int i = 1; i <= amountOfStats; i++) {
 			template += (i<=9?"0":"")+i+". @%s: %d %s";

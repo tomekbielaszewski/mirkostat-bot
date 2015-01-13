@@ -14,9 +14,9 @@ public class UserCharactersStatPrinter implements StatPrinter {
 	@Override
 	public void print(Output output) {
 		int amountOfStats = 5;
-		String[] charactersPlurals = new String[]{"znak","znaki","znakow"};
+		String[] charactersPlurals = new String[]{"znak","znaki","znaków"};
 		
-		String template = "Najwiecej piszacy uzytkownicy:\n";
+		String template = "Najwięcej piszący użytkownicy:\n";
 
 		for (int i = 1; i <= amountOfStats; i++) {
 			template += (i<=9?"0":"")+i+". @%s: %d %s";

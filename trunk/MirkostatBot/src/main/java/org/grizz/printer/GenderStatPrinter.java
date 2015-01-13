@@ -27,7 +27,7 @@ public class GenderStatPrinter implements StatPrinter {
 
                 switch(genderActivityCollector.getGenderOnPosition(i)) {
                     case "male" : parameters.add("Niebieskiepaski"); break;
-                    case "female" : parameters.add("Rozowepaski"); break;
+                    case "female" : parameters.add("Różowepaski"); break;
                 }
                 parameters.add(String.valueOf(genderCount));
             }
@@ -39,7 +39,7 @@ public class GenderStatPrinter implements StatPrinter {
     private String template(int numberOfGenders) {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Aktywnosc niebieskich i rozowych paskow:\n");
+        builder.append("Aktywność niebieskich i różowych pasków:\n");
 
         for (int i = 0; i < numberOfGenders; i++) {
             if(StringUtils.isNotEmpty(genderActivityCollector.getGenderOnPosition(i))) {

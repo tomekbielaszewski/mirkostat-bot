@@ -1,9 +1,9 @@
 package org.grizz.springconfig;
 
+import com.crozin.wykop.sdk.Application;
+import com.crozin.wykop.sdk.Session;
 import org.grizz.printer.*;
 import org.grizz.service.MicroblogService;
-import org.grizz.service.URLBuilder;
-import org.grizz.service.post.WykopUrlSigner;
 import org.grizz.statistics.StatCollectorPool;
 import org.grizz.statistics.StatCollectorPoolFactory;
 import org.grizz.statistics.collector.*;
@@ -64,6 +64,8 @@ public class BaseConfig {
     private CommentRankingCounter commentRankingCounter;
     @Autowired
     private ImageRankingCounter imageRankingCounter;
+    @Autowired
+    private TagVoteCounter tagVoteCounter;
 
     @Autowired
     private SeparatorPrinter separatorPrinter;
@@ -97,6 +99,8 @@ public class BaseConfig {
     private CommentRankingPrinter commentRankingPrinter;
     @Autowired
     private ImageRankingPrinter imageRankingPrinter;
+    @Autowired
+    private TagVoteRankingPrinter tagVoteRankingPrinter;
 
     @Bean
     public MicroblogService microblogService() {
@@ -104,18 +108,14 @@ public class BaseConfig {
     }
 
     @Bean
-    public WykopUrlSigner wykopUrlSigner() {
-        return new WykopUrlSigner(SECRET_KEY);
-    }
-
-    @Bean
-    public URLBuilder urlBuilder() {
-        return new URLBuilder(APP_KEY);
-    }
-
-    @Bean
     public StatCollectorPoolFactory statCollectorPoolFactory() {
         return StatCollectorPoolFactory.getInstance();
+    }
+
+    @Bean
+    public Session session() {
+        Application app = new Application(APP_KEY, SECRET_KEY);
+        return app.openSession(ACCOUNT_KEY);
     }
 
     @Bean
@@ -125,6 +125,7 @@ public class BaseConfig {
                 entryCounter,
                 entryLengthCollector,
                 tagCounter,
+                tagVoteCounter,
                 tagRateCounter,
                 userCounter,
                 userEntryCounter,
@@ -149,6 +150,8 @@ public class BaseConfig {
                 applicationTagPrinter,
                 separatorPrinter,
                 tagRankingPrinter,
+                separatorPrinter,
+                tagVoteRankingPrinter,
                 separatorPrinter,
                 commentRankingPrinter,
                 separatorPrinter,

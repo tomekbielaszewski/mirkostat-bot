@@ -20,7 +20,7 @@ public class ImageRankingPrinter implements StatPrinter {
 
     @Override
     public void print(Output output) {
-        String template = "Ranking najlepszych obrazkow:\n";
+        String template = "Ranking najlepszych obrazków:\n";
 
         for (int i = 1; i <= amountOfStats; i++) {
             template += (i < 10 ? "0" : "") + i + ". [(#)](%s) | [(IMG)](%s) **+%d** %s: @%s";
@@ -39,7 +39,7 @@ public class ImageRankingPrinter implements StatPrinter {
             statistics[i] = getEntryUrl(entry);
             statistics[i+1] = getImageUrl(entry);
             statistics[i+2] = entry.getVotes();
-            statistics[i+3] = getWordBySex(entry.getAuthorSex(), "Wstawil", "Wstawila");
+            statistics[i+3] = getWordBySex(entry.getAuthorSex(), "Wstawił", "Wstawiła");
             statistics[i+4] = entry.getAuthor();
         }
         String formattedStatistics = String.format(template, statistics);
