@@ -38,7 +38,7 @@ public class Starter {
         context.getBean(Starter.class).run();
     }
 
-    //    @Scheduled(cron = "00 00 17 * * *")
+//    @Scheduled(cron = "00 00 17 * * *")
     public void run() {
         String mirkoStatBotEntryBody = getMirkoStatBotEntryBody();
         printMirkoStatBot(mirkoStatBotEntryBody);
@@ -58,8 +58,6 @@ public class Starter {
     }
 
     private void printMirkoStatBot(String mirkoStatBotEntryBody) {
-        microblogService.login();
         entryPoster.post(mirkoStatBotEntryBody);
-        microblogService.logout();
     }
 }

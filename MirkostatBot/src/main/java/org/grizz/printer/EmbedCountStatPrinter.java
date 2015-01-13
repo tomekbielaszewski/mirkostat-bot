@@ -27,8 +27,8 @@ public class EmbedCountStatPrinter implements StatPrinter {
             parameters.add(String.valueOf(embedTypeCount));
 
             switch(embedCounter.getEmbedTypeOnPosition(i)) {
-                case IMAGE : parameters.add(StringPlural.choose(new String[]{"Obrazek", "Obrazki", "Obrazkow"}, embedTypeCount)); break;
-                case VIDEO : parameters.add(StringPlural.choose(new String[]{"Filmik", "Filmiki", "Filmikow"}, embedTypeCount)); break;
+                case IMAGE : parameters.add(StringPlural.choose(new String[]{"Obrazek", "Obrazki", "Obrazków"}, embedTypeCount)); break;
+                case VIDEO : parameters.add(StringPlural.choose(new String[]{"Filmik", "Filmiki", "Filmików"}, embedTypeCount)); break;
             }
         }
 
@@ -38,7 +38,7 @@ public class EmbedCountStatPrinter implements StatPrinter {
     private String template(int numberOfGenders) {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Multimedialne Mirki dodaly:\n");
+        builder.append("Mirki dodały:\n");
 
         for (int i = 0; i < numberOfGenders; i++) {
             builder.append((i>=9?"":"0")+(i+1)+". %s %s\n");

@@ -37,19 +37,19 @@ public class StatSummaryPrinter implements StatPrinter {
         int untaggedEntriesCount = untaggedEntriesCounter.getTotalUstaggedEntries();
         int notTaggingUsersCount = usersNotTaggingCounter.getNumberOfNotTaggingUsers();
 		
-		String mirekPlural = StringPlural.choose(new String[]{"Mirek** napisal","Mirki** napisaly","Mirkow** napisalo"}, amountOfUsers);
-		String entryPlural = StringPlural.choose(new String[]{"wpis","wpisy","wpisow"}, amountOfEntries);
+		String mirekPlural = StringPlural.choose(new String[]{"Mirek** napisał","Mirki** napisały","Mirków** napisało"}, amountOfUsers);
+		String entryPlural = StringPlural.choose(new String[]{"wpis","wpisy","wpisów"}, amountOfEntries);
 		String commentsPlural = StringPlural.choose(new String[]{"komentarz","komentarze","komentarzy"}, amountOfComments);
-		String characterPlural = StringPlural.choose(new String[]{"znak","znaki","znakow"}, overallCharactersTyped);
-		String tagPlural = StringPlural.choose(new String[]{"unikatowy tag","unikatowe tagi","unikatowych tagow"}, overallTagsUsed);
-		String votePlural = StringPlural.choose(new String[]{"plus","plusy","plusow"}, amountOfVotes);
-		String notTaggingMirekPlural = StringPlural.choose(new String[]{"Mirek** napisal","Mirki** napisaly","Mirkow** napisalo"}, notTaggingUsersCount);
-		String untaggedPlural = StringPlural.choose(new String[]{"nieotagowany wpis","nieotagowane wpisy","nieotagowanych wpisow"}, untaggedEntriesCount);
+		String characterPlural = StringPlural.choose(new String[]{"znak","znaki","znaków"}, overallCharactersTyped);
+		String tagPlural = StringPlural.choose(new String[]{"unikatowy tag","unikatowe tagi","unikatowych tagów"}, overallTagsUsed);
+		String votePlural = StringPlural.choose(new String[]{"plus","plusy","plusów"}, amountOfVotes);
+		String notTaggingMirekPlural = StringPlural.choose(new String[]{"Mirek** napisał","Mirki** napisały","Mirkow** napisało"}, notTaggingUsersCount);
+		String untaggedPlural = StringPlural.choose(new String[]{"nieotagowany wpis","nieotagowane wpisy","nieotagowanych wpisów"}, untaggedEntriesCount);
 
 		String summary = 
 			String.format("Przez ostatnie 24 godziny **%d %s **%d %s** i **%d %s** "
-					+ "o lacznej dlugosci **%d %s**. Uzyto przy tym **%d %s** i rozdano **%d %s**.\n" +
-                      "Jednakze **%d %s **%d %s**... Nieladnie... #tagujtogowno! A moze #nietagujebonocna?",
+					+ "o łącznej długosci **%d %s**. Użyto przy tym **%d %s** i rozdano **%d %s**.\n" +
+                      "Jednakże **%d %s **%d %s**... Nieładnie... #tagujtogowno! A może #nietagujebonocna?",
 			amountOfUsers, mirekPlural, 
 			amountOfEntries, entryPlural,
             amountOfComments, commentsPlural,

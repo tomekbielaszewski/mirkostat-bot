@@ -3,7 +3,7 @@ package org.grizz.springconfig;
 import org.grizz.service.post.EntryPoster;
 import org.grizz.service.post.SystemOutEntryPoster;
 import org.grizz.service.provider.EntryProvider;
-import org.grizz.service.provider.MirkoEntryProvider;
+import org.grizz.service.provider.WykopocztaEntryProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Profile;
 /**
  * Created by Grizz on 2014-07-03.
  */
-@Profile("dev")
+@Profile("wykopoczta")
 @Configuration
-public class DevConfig {
-    private static final long COLLECTION_PERIOD = 86400000; //doba
+public class WykopocztaConfig {
+    public static final String USER = "zly_wieczor";
 
     @Bean
     public EntryPoster entryPoster() {
@@ -23,7 +23,6 @@ public class DevConfig {
 
     @Bean
     public EntryProvider entryProvider() {
-//        return new DevEntryProvider();
-        return new MirkoEntryProvider(COLLECTION_PERIOD);
+        return new WykopocztaEntryProvider();
     }
 }

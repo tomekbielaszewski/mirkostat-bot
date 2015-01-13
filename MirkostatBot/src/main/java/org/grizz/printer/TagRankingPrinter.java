@@ -17,11 +17,11 @@ public class TagRankingPrinter implements StatPrinter {
 
 	@Override
 	public void print(Output output) {
-		String template = "Ranking najpopularniejszych tagow:\n";
+		String template = "Ranking najpopularniejszych tagów:\n";
         int amountOfEntries = entryCounter.getNumberOfEntries();
 
 		for (int i = 1; i <= amountOfStats; i++) {
-			template += (i < 10 ? "0" : "") + i + ". [%s](www.wykop.pl/tag/%s) x%d (%s wszystkich)"; //[wykop](www.wykop.pl)
+			template += (i < 10 ? "0" : "") + i + ". #[%s](www.wykop.pl/tag/%s) x%d (%s wszystkich)"; //[wykop](www.wykop.pl)
 			if(i < amountOfStats) {
 				template += "\n";
 			}

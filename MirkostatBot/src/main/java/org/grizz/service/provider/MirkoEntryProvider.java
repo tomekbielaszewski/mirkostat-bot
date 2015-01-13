@@ -26,7 +26,7 @@ public class MirkoEntryProvider implements EntryProvider {
 		boolean isOldEntryFound = iterateWithStreamIndex(entriesDownloaded, currentDate, 100);
         if(!isOldEntryFound) {
             Entry lastEntry = entriesDownloaded.get(entriesDownloaded.size() - 1);
-            iterateWithStreamfirstId(lastEntry.getId(), entriesDownloaded, currentDate);
+            iterateWithStreamFirstId(lastEntry.getId(), entriesDownloaded, currentDate);
         }
 
 		return entriesDownloaded;
@@ -53,7 +53,7 @@ public class MirkoEntryProvider implements EntryProvider {
         return oldEntryFound;
     }
 
-    private void iterateWithStreamfirstId(Long lastId, List<Entry> downloadedEntries, Date currentDate) {
+    private void iterateWithStreamFirstId(Long lastId, List<Entry> downloadedEntries, Date currentDate) {
         boolean oldEntryFound = false;
 
         while(!oldEntryFound) {

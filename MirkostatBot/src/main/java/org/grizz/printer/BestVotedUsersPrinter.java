@@ -13,7 +13,7 @@ public class BestVotedUsersPrinter implements StatPrinter {
 	@Override
 	public void print(Output output) {
 		output.append(
-				String.format("Najbardziej zaplusowany Mirek @%s dostal lacznie **%d plusow** zdobytych we wpisach i komentarzach. Brawo! Atencja musi sie zgadzac!",
+				String.format("Najbardziej zaplusowany Mirek @%s dostał łącznie **%d plusów** zdobytych we wpisach i komentarzach. Brawo! Atencja musi się zgadzać!",
 				totalVoteCollector.getBestVotedUser(),
 				totalVoteCollector.getBestVotes()));
 		output.append("\n\n");

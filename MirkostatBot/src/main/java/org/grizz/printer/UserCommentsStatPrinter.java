@@ -16,7 +16,7 @@ public class UserCommentsStatPrinter implements StatPrinter {
 		int amountOfStats = 5;
 		String[] commentPlurals = new String[]{"komentarz","komentarze","komentarzy"};
 		
-		String template = "Najwiecej komentujacy uzytkownicy:\n";
+		String template = "Najwięcej komentujący użytkownicy:\n";
 
 		for (int i = 1; i <= amountOfStats; i++) {
 			template += (i<=9?"0":"")+i+". @%s: %d %s";

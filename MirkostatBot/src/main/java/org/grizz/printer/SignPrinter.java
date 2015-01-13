@@ -11,6 +11,6 @@ public class SignPrinter implements StatPrinter {
     @Override
     public void print(Output output) {
         output.append("by @Grizwold\n");
-        output.append("Sprawdz tez #mirkoonlinebot'a! Licznik aktywnych Mirkow!");
+        output.append("Sprawdź też #mirkoonlinebot'a! [Licznik aktywnych Mirków!](http://mirkoonline.grizwold.pl/)");
     }
 }

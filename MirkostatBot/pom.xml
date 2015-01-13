@@ -4,7 +4,7 @@
     <groupId>org.grizz</groupId>
     <artifactId>Mirkostatbot</artifactId>
     <packaging>jar</packaging>
-    <version>1.5.3.BUILD-SNAPSHOT</version>
+    <version>1.5.4.BUILD-SNAPSHOT</version>
     <name>Mirkostatbot</name>
 
     <properties>
@@ -26,6 +26,16 @@
             <name>Spring Maven Milestone Repository</name>
             <url>http://maven.springframework.org/milestone</url>
         </repository>
+
+
+        <repository>
+            <id>wykop.pl-java-sdk-mvn-repository</id>
+            <url>https://raw.github.com/Crozin/Wykop.pl-Java-SDK/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -45,6 +55,11 @@
         </pluginRepository>
     </pluginRepositories>
     <dependencies>
+        <dependency>
+            <groupId>com.crozin</groupId>
+            <artifactId>com.crozin.wykop.sdk</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
