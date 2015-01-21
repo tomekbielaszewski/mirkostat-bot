@@ -1,21 +1,25 @@
 package org.grizz.statistics.collector;
 
 import org.grizz.model.Entry;
+import org.grizz.model.EntryComment;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Grizz on 2014-07-04.
  */
 @Service
 public class EntryCommentCounter extends AbstractStatCounter {
-    private int numberOfComments;
+    private Set<EntryComment> comments = new HashSet<>();
 
     @Override
     public void collect(Entry entry) {
-        numberOfComments += entry.getComments().size();
+        comments.addAll(entry.getComments());
     }
 
     public int getNumberOfComments() {
-        return numberOfComments;
+        return comments.size();
     }
 }
