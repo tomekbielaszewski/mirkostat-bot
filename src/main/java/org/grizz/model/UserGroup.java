@@ -1,8 +1,5 @@
 package org.grizz.model;
 
-/**
- * Created by Grizz on 2014-07-05.
- */
 public enum UserGroup {
     GREEN(0),
     ORANGE(1),
@@ -12,7 +9,7 @@ public enum UserGroup {
     BLUE(2001),
     DELETED(1002);
 
-    int value;
+    private int value;
 
     UserGroup(int value) {
         this.value = value;
