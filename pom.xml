@@ -21,6 +21,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.crozin</groupId>
+            <artifactId>com.crozin.wykop.sdk</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.14.4</version>
@@ -76,5 +81,16 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>wykop.pl-java-sdk-mvn-repository</id>
+            <url>https://raw.github.com/Crozin/Wykop.pl-Java-SDK/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>

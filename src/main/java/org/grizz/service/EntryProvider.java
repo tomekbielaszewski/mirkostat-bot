@@ -1,4 +1,4 @@
-package org.grizz;
+package org.grizz.service;
 
 import org.grizz.model.Entry;
 import org.springframework.stereotype.Service;
