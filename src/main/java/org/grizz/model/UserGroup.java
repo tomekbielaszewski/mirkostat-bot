@@ -1,5 +1,7 @@
 package org.grizz.model;
 
+import java.util.Arrays;
+
 public enum UserGroup {
     GREEN(0),
     ORANGE(1),
@@ -20,14 +22,9 @@ public enum UserGroup {
     }
 
     public static UserGroup byValue(int value) {
-        UserGroup[] allUserGroups = values();
-
-        for (UserGroup userGroup : allUserGroups) {
-            if(userGroup.getValue() == value) {
-                return userGroup;
-            }
-        }
-
-        throw new IllegalArgumentException("Group with id "+value+" not found!");
+        return Arrays.stream(values())
+                .filter(ug -> ug.getValue() == value)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Group with id " + value + " not found!"));
     }
 }
