@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Data
 @Builder
-public class Tag implements Identifable {
+public class Tag {
     private String name;
-	private Long id;
 }

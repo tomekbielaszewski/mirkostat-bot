@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class EntryComment implements Identifable {
+public class EntryComment {
     private Long id;
 
     private String author;
