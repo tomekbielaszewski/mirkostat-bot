@@ -5,6 +5,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.grizz.model.Entry;
 import org.grizz.session.Session;
 import org.grizz.session.SessionProvider;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class EntryProvider {
     private final long DAY = 24 * 60 * 60 * 1000;
@@ -73,6 +75,7 @@ public class EntryProvider {
     private List<Entry> getNextPage(Long id, Session session) {
         String firstPage = session.execute(getStreamFirstIdCommand(id.toString()));
         Entry[] entries = gson.fromJson(firstPage, Entry[].class);
+        log.info(entries[entries.length - 1].getDateAdded().toString());
         return Lists.newArrayList(entries);
     }
 

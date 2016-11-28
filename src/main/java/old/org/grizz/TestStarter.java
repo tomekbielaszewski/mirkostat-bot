@@ -23,7 +23,7 @@ public class TestStarter {
     @Autowired
     private MicroblogService microblogService;
 
-    public static void main(String[] args) {
+    public static void main_old(String[] args) {
         Logger logger = Logger.getLogger(TestStarter.class);
 
         logger.info("Application context is loading...");

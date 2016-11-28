@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -57,17 +55,6 @@ public class StatisticsFormatter {
     }
 
     private Path getFilepath(String filePath) {
-        URL url = getClass().getClassLoader().getResource(filePath);
-        if (url == null) {
-            throw new RuntimeException("Problem loading file [" + filePath + "]");
-        }
-        log.debug("Accessing file: " + filePath);
-        Path path;
-        try {
-            path = Paths.get(url.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        return path;
+        return Paths.get(filePath);
     }
 }
