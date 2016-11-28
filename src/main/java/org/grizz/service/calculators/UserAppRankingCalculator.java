@@ -1,10 +1,9 @@
 package org.grizz.service.calculators;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grizz.model.Entry;
-import org.grizz.model.Tag;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SummingRanking;
-import org.grizz.service.calculators.structures.TagExtractor;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -17,9 +16,15 @@ public class UserAppRankingCalculator implements StatisticsCalculator {
     @Override
     public void consume(Set<Entry> entries) {
         entries.forEach(e -> {
-            ranking.add(e.getApp());
-            e.getComments().forEach(c -> ranking.add(c.getApp()));
+            count(e.getApp());
+            e.getComments().forEach(c -> count(c.getApp()));
         });
+    }
+
+    private void count(String app) {
+        if (StringUtils.isBlank(app))
+            return;
+        ranking.add(app);
     }
 
     @Override

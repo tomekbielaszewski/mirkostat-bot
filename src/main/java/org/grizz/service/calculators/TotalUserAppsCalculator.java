@@ -1,6 +1,7 @@
 package org.grizz.service.calculators;
 
 import com.google.common.collect.Sets;
+import org.apache.commons.lang3.StringUtils;
 import org.grizz.model.Entry;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +15,15 @@ public class TotalUserAppsCalculator implements StatisticsCalculator {
     @Override
     public void consume(Set<Entry> entries) {
         entries.forEach(e -> {
-            apps.add(e.getApp());
-            e.getComments().forEach(c -> apps.add(c.getApp()));
+            count(e.getApp());
+            e.getComments().forEach(c -> count(c.getApp()));
         });
+    }
+
+    private void count(String app) {
+        if (StringUtils.isBlank(app))
+            return;
+        apps.add(app);
     }
 
     @Override

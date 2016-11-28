@@ -16,9 +16,7 @@ public class CharactersTypedPerUserRankingCalculator implements StatisticsCalcul
     public void consume(Set<Entry> entries) {
         entries.forEach(e -> {
             ranking.add(e.getAuthor(), e.getBody().length());
-            e.getComments().forEach(c -> {
-                ranking.add(c.getAuthor(), c.getBody().length());
-            });
+            e.getComments().forEach(c -> ranking.add(c.getAuthor(), c.getBody().length()));
         });
     }
 

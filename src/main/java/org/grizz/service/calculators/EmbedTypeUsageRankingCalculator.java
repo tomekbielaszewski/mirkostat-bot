@@ -10,8 +10,8 @@ import java.util.Optional;
 import java.util.Set;
 
 @Component
-public class EmbedCounterCalculator implements StatisticsCalculator {
-    public static final String NAME = "multimediaCounter";
+public class EmbedTypeUsageRankingCalculator implements StatisticsCalculator {
+    public static final String NAME = "embedTypeUsageRanking";
     private Ranking ranking = new SummingRanking();
 
     @Override
@@ -23,7 +23,7 @@ public class EmbedCounterCalculator implements StatisticsCalculator {
     }
 
     private void count(Embed embed) {
-        Optional.ofNullable(embed).ifPresent(cEmbed -> ranking.add(cEmbed.getType()));
+        Optional.ofNullable(embed).ifPresent(e -> ranking.add(e.getType()));
     }
 
     @Override

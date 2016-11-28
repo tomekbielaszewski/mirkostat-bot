@@ -14,11 +14,7 @@ public class UserCommentCountRankingCalculator implements StatisticsCalculator {
 
     @Override
     public void consume(Set<Entry> entries) {
-        entries.forEach(e -> {
-            e.getComments().forEach(c -> {
-                ranking.add(c.getAuthor());
-            });
-        });
+        entries.forEach(e -> e.getComments().forEach(c -> ranking.add(c.getAuthor())));
     }
 
     @Override
