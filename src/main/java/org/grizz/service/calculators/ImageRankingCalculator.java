@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Component
 public class ImageRankingCalculator implements StatisticsCalculator {
-    public static final String NAME = "bestImages";
+    public static final String NAME = "imageRanking";
     private Ranking ranking = new SimpleRanking();
 
     @Override

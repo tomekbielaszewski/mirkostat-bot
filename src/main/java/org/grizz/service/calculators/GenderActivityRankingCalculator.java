@@ -1,24 +1,28 @@
 package org.grizz.service.calculators;
 
+import org.grizz.model.Embed;
 import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SummingRanking;
-import org.grizz.service.calculators.structures.TagExtractor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Component
-public class TagsUsageRankingCalculator implements StatisticsCalculator {
-    public static final String NAME = "totalTagsUsedCounter";
+public class GenderActivityRankingCalculator implements StatisticsCalculator {
+    public static final String NAME = "genderActivityRanking";
     private Ranking ranking = new SummingRanking();
 
     @Override
     public void consume(Set<Entry> entries) {
-        TagExtractor tagExtractor = new TagExtractor();
         entries.forEach(e -> {
-            tagExtractor.extract(e.getBody()).forEach(t -> ranking.add(t.getName()));
-            e.getComments().forEach(c -> tagExtractor.extract(c.getBody()).forEach(t -> ranking.add(t.getName())));
+            ranking.add(e.getAuthorSex());
+            e.getVoters().forEach(vote -> ranking.add(vote.getAuthorSex()));
+            e.getComments().forEach(c -> {
+                ranking.add(c.getAuthorSex());
+                c.getVoters().forEach(cVote -> ranking.add(cVote.getAuthorSex()));
+            });
         });
     }
 

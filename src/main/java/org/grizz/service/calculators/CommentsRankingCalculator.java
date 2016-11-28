@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Component
 public class CommentsRankingCalculator implements StatisticsCalculator {
-    public static final String NAME = "bestComments";
+    public static final String NAME = "commentRanking";
     private Ranking ranking = new SimpleRanking();
 
     @Override

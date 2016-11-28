@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class GenderRankingCalkulatorTest {
+public class GenderActivityRankingCalculatorTest {
     @Test
     public void consume() throws Exception {
         throw new NotImplementedException();

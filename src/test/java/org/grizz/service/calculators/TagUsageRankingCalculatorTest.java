@@ -9,19 +9,9 @@ import static org.junit.Assert.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class EmbedCounterCalkulatorTest {
+public class TagUsageRankingCalculatorTest {
     @Test
     public void consume() throws Exception {
-        throw new NotImplementedException();
-    }
-
-    @Test
-    public void getName() throws Exception {
-        throw new NotImplementedException();
-    }
-
-    @Test
-    public void getValue() throws Exception {
         throw new NotImplementedException();
     }
 

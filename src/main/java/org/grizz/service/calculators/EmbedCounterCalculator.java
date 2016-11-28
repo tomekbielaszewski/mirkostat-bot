@@ -10,20 +10,20 @@ import java.util.Optional;
 import java.util.Set;
 
 @Component
-public class GenderRankingCalkulator implements StatisticsCalculator {
-    public static final String NAME = "genderRanking";
+public class EmbedCounterCalculator implements StatisticsCalculator {
+    public static final String NAME = "multimediaCounter";
     private Ranking ranking = new SummingRanking();
 
     @Override
     public void consume(Set<Entry> entries) {
         entries.forEach(e -> {
-            ranking.add(e.getAuthorSex());
-            e.getVoters().forEach(vote -> ranking.add(vote.getAuthorSex()));
-            e.getComments().forEach(c -> {
-                ranking.add(c.getAuthorSex());
-                c.getVoters().forEach(cVote -> ranking.add(cVote.getAuthorSex()));
-            });
+            count(e.getEmbed());
+            e.getComments().forEach(comment -> count(comment.getEmbed()));
         });
+    }
+
+    private void count(Embed embed) {
+        Optional.of(embed).ifPresent(cEmbed -> ranking.add(cEmbed.getType()));
     }
 
     @Override
