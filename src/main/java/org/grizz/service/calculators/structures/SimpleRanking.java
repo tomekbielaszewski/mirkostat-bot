@@ -12,6 +12,11 @@ public class SimpleRanking implements Ranking {
     private List<RankedObject> ranking = Lists.newArrayList();
 
     @Override
+    public void add(Object obj) {
+        add(obj, 1);
+    }
+
+    @Override
     public void add(Object obj, int value) {
         ranking.add(new RankedObject(obj, value));
     }
