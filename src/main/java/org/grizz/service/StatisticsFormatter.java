@@ -5,6 +5,8 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.grizz.model.Entry;
+import org.grizz.model.EntryComment;
 import org.grizz.model.Statistics;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class StatisticsFormatter {
 
     public String format(Statistics stats) {
         Map<String, Object> model = stats.getStats();
+        model.put("Entry", Entry.class);
+        model.put("EntryComment", EntryComment.class);
         return formatWith(model);
     }
 
