@@ -1,6 +1,5 @@
 package old.org.grizz.printer;
 
-import old.org.grizz.model.EmbedType;
 import old.org.grizz.output.Output;
 import old.org.grizz.statistics.collector.EmbedCounter;
 import old.org.grizz.utils.StringPlural;
@@ -27,9 +26,13 @@ public class EmbedCountStatPrinter implements StatPrinter {
 
             parameters.add(String.valueOf(embedTypeCount));
 
-            switch(embedCounter.getEmbedTypeOnPosition(i)) {
-                case EmbedType.IMAGE : parameters.add(StringPlural.choose(new String[]{"Obrazek", "Obrazki", "Obrazków"}, embedTypeCount)); break;
-                case EmbedType.VIDEO : parameters.add(StringPlural.choose(new String[]{"Filmik", "Filmiki", "Filmików"}, embedTypeCount)); break;
+            switch (embedCounter.getEmbedTypeOnPosition(i)) {
+                case IMAGE:
+                    parameters.add(StringPlural.choose(new String[]{"Obrazek", "Obrazki", "Obrazków"}, embedTypeCount));
+                    break;
+                case VIDEO:
+                    parameters.add(StringPlural.choose(new String[]{"Filmik", "Filmiki", "Filmików"}, embedTypeCount));
+                    break;
             }
         }
 
@@ -42,7 +45,7 @@ public class EmbedCountStatPrinter implements StatPrinter {
         builder.append("Mirki dodały:\n");
 
         for (int i = 0; i < numberOfGenders; i++) {
-            builder.append((i>=9?"":"0")+(i+1)+". %s %s\n");
+            builder.append((i >= 9 ? "" : "0") + (i + 1) + ". %s %s\n");
         }
 
         builder.append("\n");

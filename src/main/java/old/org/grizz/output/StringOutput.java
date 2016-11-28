@@ -2,7 +2,6 @@ package old.org.grizz.output;
 
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
 
 @Service
 public class StringOutput implements Output {
@@ -13,7 +12,7 @@ public class StringOutput implements Output {
     }
 
     @Override
-	public void append(@NotNull String output) {
+	public void append( String output) {
 		stringBuilder.append(output);
 	}
 

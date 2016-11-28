@@ -1,6 +1,5 @@
 package old.org.grizz.printer;
 
-import old.org.grizz.model.UserGroup;
 import old.org.grizz.output.Output;
 import old.org.grizz.statistics.collector.UserGroupActivityCollector;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +21,28 @@ public class UserGroupStatPrinter implements StatPrinter {
         ArrayList<String> parameters = new ArrayList<>();
 
         for (int i = 0; i < numberOfGenders; i++) {
-            switch(userGroupActivityCollector.getUserGroupOnPosition(i)) {
-                case UserGroup.GREEN: parameters.add("Zielonki"); break;
-                case UserGroup.ORANGE: parameters.add("Pomarańczki"); break;
-                case UserGroup.RED: parameters.add("Bordo"); break;
-                case UserGroup.BLACK: parameters.add("Admini"); break;
-                case UserGroup.BLUE: parameters.add("Sponsorowani"); break;
-                case UserGroup.SILVER: parameters.add("Srebro"); break;
-                case UserGroup.DELETED: parameters.add("Emoquit"); break;
+            switch (userGroupActivityCollector.getUserGroupOnPosition(i)) {
+                case GREEN:
+                    parameters.add("Zielonki");
+                    break;
+                case ORANGE:
+                    parameters.add("Pomarańczki");
+                    break;
+                case RED:
+                    parameters.add("Bordo");
+                    break;
+                case BLACK:
+                    parameters.add("Admini");
+                    break;
+                case BLUE:
+                    parameters.add("Sponsorowani");
+                    break;
+                case SILVER:
+                    parameters.add("Srebro");
+                    break;
+                case DELETED:
+                    parameters.add("Emoquit");
+                    break;
             }
             parameters.add(String.valueOf(userGroupActivityCollector.getUserGroupCountOnPosition(i)));
         }
@@ -43,7 +56,7 @@ public class UserGroupStatPrinter implements StatPrinter {
         builder.append("Aktywność grup użytkowników:\n");
 
         for (int i = 0; i < numberOfGenders; i++) {
-            builder.append((i>=9?"":"0")+(i+1)+". %s x%s\n");
+            builder.append((i >= 9 ? "" : "0") + (i + 1) + ". %s x%s\n");
         }
 
         builder.append("\n");

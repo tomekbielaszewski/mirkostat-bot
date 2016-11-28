@@ -5,7 +5,7 @@ import org.grizz.model.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Set;
 
 @Component
 public class Task {
@@ -19,7 +19,8 @@ public class Task {
     private EntryPoster entryPoster;
 
     public void run() {
-        List<Entry> entries = entryProvider.getList();
+//        Set<Entry> entries = entryProvider.getEntries();
+        Set<Entry> entries = entryProvider.getDevEntries();
         Statistics stats = statisticsProvider.calculate(entries);
         String formattedStats = statisticsFormatter.format(stats);
         entryPoster.post(formattedStats);

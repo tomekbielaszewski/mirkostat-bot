@@ -2,10 +2,12 @@ package org.grizz.service.calculators;
 
 import org.grizz.model.Entry;
 
-import java.util.List;
+import java.util.Set;
 
 public interface StatisticsCalculator {
-    void consume(List<Entry> entries);
+    void consume(Set<Entry> entries);
+
     String getName();
+
     Object getValue();
 }

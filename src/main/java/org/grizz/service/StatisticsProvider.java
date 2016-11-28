@@ -4,14 +4,17 @@ import org.grizz.model.Entry;
 import org.grizz.model.Statistics;
 import org.grizz.service.calculators.StatisticsCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
+@Service
 public class StatisticsProvider {
     @Autowired
     private List<StatisticsCalculator> calculators;
 
-    public Statistics calculate(List<Entry> entries) {
+    public Statistics calculate(Set<Entry> entries) {
         calculators.forEach(c -> c.consume(entries));
         Statistics stats = getStatistics(calculators);
         return stats;

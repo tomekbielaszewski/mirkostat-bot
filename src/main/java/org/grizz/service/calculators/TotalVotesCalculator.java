@@ -3,7 +3,7 @@ package org.grizz.service.calculators;
 import org.grizz.model.Entry;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Set;
 
 @Component
 public class TotalVotesCalculator implements StatisticsCalculator {
@@ -11,7 +11,7 @@ public class TotalVotesCalculator implements StatisticsCalculator {
     private int totalVotesCounter = 0;
 
     @Override
-    public void consume(List<Entry> entries) {
+    public void consume(Set<Entry> entries) {
         entries.forEach(e -> {
             totalVotesCounter += e.getVotes();
             e.getComments().forEach(c -> totalVotesCounter += c.getVotes());
