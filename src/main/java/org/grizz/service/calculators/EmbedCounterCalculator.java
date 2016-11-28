@@ -23,7 +23,7 @@ public class EmbedCounterCalculator implements StatisticsCalculator {
     }
 
     private void count(Embed embed) {
-        Optional.of(embed).ifPresent(cEmbed -> ranking.add(cEmbed.getType()));
+        Optional.ofNullable(embed).ifPresent(cEmbed -> ranking.add(cEmbed.getType()));
     }
 
     @Override
