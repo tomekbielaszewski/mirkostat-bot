@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 
 @Component
-public class UserAppsRankingCalculator implements StatisticsCalculator {
-    public static final String NAME = "userAppsRanking";
+public class UserAppRankingCalculator implements StatisticsCalculator {
+    public static final String NAME = "userAppRanking";
     private Ranking ranking = new SummingRanking();
 
     @Override
