@@ -1,5 +1,6 @@
 package org.grizz.service.calculators;
 
+import org.apache.commons.lang3.StringUtils;
 import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SummingRanking;
@@ -15,13 +16,19 @@ public class GenderActivityRankingCalculator implements StatisticsCalculator {
     @Override
     public void consume(Set<Entry> entries) {
         entries.forEach(e -> {
-            ranking.add(e.getAuthorSex());
-            e.getVoters().forEach(v -> ranking.add(v.getAuthorSex()));
+            count(e.getAuthorSex());
+            e.getVoters().forEach(v -> count(v.getAuthorSex()));
             e.getComments().forEach(c -> {
-                ranking.add(c.getAuthorSex());
-                c.getVoters().forEach(v -> ranking.add(v.getAuthorSex()));
+                count(c.getAuthorSex());
+                c.getVoters().forEach(v -> count(v.getAuthorSex()));
             });
         });
+    }
+
+    private void count(String gender) {
+        if (StringUtils.isBlank(gender))
+            return;
+        ranking.add(gender);
     }
 
     @Override
