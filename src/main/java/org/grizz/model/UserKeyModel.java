@@ -1,16 +1,10 @@
 package org.grizz.model;
 
-/**
- * Created by Grizz on 2014-06-22.
- */
+import lombok.Data;
+import lombok.experimental.Builder;
+
+@Data
+@Builder
 public class UserKeyModel {
     private String userkey;
-
-    public void setUserkey(String userkey) {
-        this.userkey = userkey;
-    }
-
-    public String getUserkey() {
-        return userkey;
-    }
 }
