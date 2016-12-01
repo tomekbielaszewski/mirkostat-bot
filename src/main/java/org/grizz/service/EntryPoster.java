@@ -14,10 +14,9 @@ public class EntryPoster {
     private SessionProvider sessionProvider;
 
     public void post(String formattedStats) {
-        System.out.println(formattedStats);
-//        Session session = sessionProvider.getPosterSession();
-//        String result = session.execute(postCommand(formattedStats));
-//        log.info(result);
+        Session session = sessionProvider.getPosterSession();
+        String result = session.execute(postCommand(formattedStats));
+        log.info(result);
     }
 
     private Command postCommand(String bodyContent) {
