@@ -14,15 +14,4 @@ public class TotalEntriesCalculatorTest {
     public void consume() throws Exception {
         throw new NotImplementedException();
     }
-
-    @Test
-    public void getName() throws Exception {
-        throw new NotImplementedException();
-    }
-
-    @Test
-    public void getValue() throws Exception {
-        throw new NotImplementedException();
-    }
-
 }
