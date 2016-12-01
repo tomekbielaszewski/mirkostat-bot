@@ -1,0 +1,1 @@
+# mirkostat-bot [![Build Status](https://travis-ci.org/tomekbielaszewski/mirkostat-bot.svg)](https://travis-ci.org/tomekbielaszewski/mirkostat-bot)
