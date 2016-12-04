@@ -196,3 +196,4 @@ Jednakże **${totalUsersNotTaggingCounter}** Mirków napisało **${untaggedEntri
 ------------------------------------
 
 by @Grizwold
+Sprawdź też #mirkoonlinebot'a! [Licznik aktywnych Mirków](http://mirkoonline.grizwold.pl/)!
