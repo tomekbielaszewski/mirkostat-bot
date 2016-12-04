@@ -24,7 +24,7 @@ public class TotalTagsUsedCalculatorTest {
 
     @Test
     public void consume() throws Exception {
-        EntryComment firstComment = EntryComment.builder().body("blah blah "+tag()+" fljsdl jkl l "+tag()+" jklfsd.").build();
+        EntryComment firstComment = EntryComment.builder().body("blah blah "+tag()+" fljsdl jkl l "+tag()+" jklfsd.\n"+tag()).build();
         EntryComment secondComment = EntryComment.builder().body("").build();
         EntryComment thirdComment = EntryComment.builder().body(tag()).build();
 
@@ -44,7 +44,7 @@ public class TotalTagsUsedCalculatorTest {
         calculator.consume(Sets.newHashSet(entry, entry2, entry3));
         int value = (int) calculator.getValue();
 
-        assertThat(value, is(5));
+        assertThat(value, is(6));
     }
 
     private String tag() {

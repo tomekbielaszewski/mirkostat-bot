@@ -11,7 +11,7 @@ public class TagExtractor {
 
     public Set<Tag> extract(String body) {
         Set<Tag> tags = Sets.newHashSet();
-        Pattern p = Pattern.compile("( |^)#\\w{2,}", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(\\s|^)#\\w{2,}", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(body);
 
         while (m.find()) {
