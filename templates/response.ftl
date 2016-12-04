@@ -1,5 +1,5 @@
 <#setting number_format="computer">
-[ #mirkostatbot ]
+**[ #mirkostatbot ]**
 Czyli co się działo przez ostatnie 24 godziny na Mirko?
 
 ------------------------------------
@@ -10,7 +10,7 @@ Ranking najpopularniejszych tagów:
         <@compress single_line=true>
         ${item?counter?string["00"]}.
         [${item.key}](http://www.wykop.pl/tag/${item.key})
-        x${item.value}
+        x**${item.value}**
         (${(item.value/totalTagsUsedCounter)?string.percent} wszystkich)
         </@compress>
 
@@ -26,7 +26,7 @@ Ranking najbardziej zaplusowanych tagów:
         <@compress single_line=true>
         ${item?counter?string["00"]}.
         [${item.key}](http://www.wykop.pl/tag/${item.key})
-        - w tagu rozdano ${item.value} plusów
+        - w tagu rozdano **${item.value}** plusów
         </@compress>
 
         <#if item?counter == 10><#break></#if>
@@ -41,7 +41,7 @@ Ranking najlepszych komentarzy:
         <@compress single_line=true>
         ${item?counter?string["00"]}.
         [(#)](http://www.wykop.pl/wpis/${item.key.entryId}/#comment-${item.key.id})
-        +${item.value}
+        **+${item.value}**
         Autor: @${item.key.author}
         </@compress>
 
@@ -59,7 +59,7 @@ Ranking najlepszych obrazków:
             <#if Entry.isInstance(item.key)>[(#)](http://www.wykop.pl/wpis/${item.key.id})</#if>
             <#if EntryComment.isInstance(item.key)>[(#)](http://www.wykop.pl/wpis/${item.key.entryId}/#comment-${item.key.id})</#if>
         | [(IMG)](${item.key.embed.url})
-        +${item.value}
+        **+${item.value}**
         Wstawił: @${item.key.author}
         </@compress>
 
@@ -70,12 +70,12 @@ Ranking najlepszych obrazków:
 ------------------------------------
 <#assign mostVotedUser=mostVotedUsersRanking?first>
 
-Najbardziej zaplusowany Mirek @${mostVotedUser.key} dostał łącznie ${mostVotedUser.value} plusów zdobytych we wpisach i komentarzach. Brawo! Atencja musi się zgadzać!
+Najbardziej zaplusowany Mirek @${mostVotedUser.key} dostał łącznie **${mostVotedUser.value} plusów** zdobytych we wpisach i komentarzach. Brawo! Atencja musi się zgadzać!
 
 ------------------------------------
 <#assign mostActiveUser=userActivityRanking?first>
 
-Najaktywniejszy Mirek to @${mostActiveUser.key}! Łączna liczba wykonanych przez niego akcji* to ${mostActiveUser.value}
+Najaktywniejszy Mirek to @${mostActiveUser.key}! Łączna liczba wykonanych przez niego akcji* to **${mostActiveUser.value}**
 
 ! * - suma z liczby napisanych wpisów i komentarzy jak i liczby podarowanych plusów
 
@@ -87,7 +87,7 @@ Najczęsciej piszący użytkownicy:
         <@compress single_line=true>
         ${item?counter?string["00"]}.
         @${item.key}:
-        ${item.value} wpisów
+        **${item.value}** wpisów
         </@compress>
 
         <#if item?counter == 5><#break></#if>
@@ -102,7 +102,7 @@ Najwięcej piszący użytkownicy:
         <@compress single_line=true>
         ${item?counter?string["00"]}.
         @${item.key}:
-        ${item.value} znaków
+        **${item.value}** znaków
         </@compress>
 
         <#if item?counter == 5><#break></#if>
@@ -117,7 +117,7 @@ Najwięcej komentujący użytkownicy:
         <@compress single_line=true>
         ${item?counter?string["00"]}.
         @${item.key}:
-        ${item.value} komentarzy
+        **${item.value}** komentarzy
         </@compress>
 
         <#if item?counter == 5><#break></#if>
@@ -133,7 +133,7 @@ Aktywność niebieskich i różowych pasków:
         ${item?counter?string["00"]}.
             <#if item.key="male">Niebieskiepaski:</#if>
             <#if item.key="female">Różowepaski:</#if>
-        x${item.value}
+        x**${item.value}**
         </@compress>
 
     </#items>
@@ -153,7 +153,7 @@ Aktywność grup użytkowników:
             <#if item.key.name()="BLACK">Administracja:</#if>
             <#if item.key.name()="BLUE">Sponsorowani:</#if>
             <#if item.key.name()="DELETED">Emoquit:</#if>
-        x${item.value}
+        x**${item.value}**
         </@compress>
 
     </#items>
@@ -167,7 +167,7 @@ Mirki ostatnio pisały z takich oto aplikacji:
         <@compress single_line=true>
         ${item?counter?string["00"]}.
         ${item.key}:
-        x${item.value}
+        x**${item.value}**
         </@compress>
 
     </#items>
@@ -180,7 +180,7 @@ Mirki dodały:
     <#items as item>
         <@compress single_line=true>
         ${item?counter?string["00"]}.
-        ${item.value}
+        **${item.value}**
             <#if item.key.name()="IMAGE">Obrazków</#if>
             <#if item.key.name()="VIDEO">Filmików</#if>
         </@compress>
@@ -190,8 +190,8 @@ Mirki dodały:
 
 ------------------------------------
 
-Przez ostatnie 24 godziny ${userCounter} Mirków napisało ${totalEntriesCounter} wpisów i ${totalCommentsCounter} komentarzy o łącznej długosci ${totalCharactersTypedCounter} znaki. Użyto przy tym ${totalTagsUsedCounter} unikatowych tagów i rozdano ${totalVotesCounter} plusów.
-Jednakże ${totalUsersNotTaggingCounter} Mirków napisało ${untaggedEntriesCounter} nieotagowanych wpisów... Nieładnie... #tagujtogowno! A może #nietagujebonocna?
+Przez ostatnie 24 godziny **${userCounter}** Mirków napisało **${totalEntriesCounter}** wpisów i **${totalCommentsCounter}** komentarzy o łącznej długosci **${totalCharactersTypedCounter}** znaki. Użyto przy tym **${totalTagsUsedCounter}** unikatowych tagów i rozdano **${totalVotesCounter}** plusów.
+Jednakże **${totalUsersNotTaggingCounter}** Mirków napisało **${untaggedEntriesCounter}** nieotagowanych wpisów... Nieładnie... #tagujtogowno! A może #nietagujebonocna?
 
 ------------------------------------
 

@@ -80,10 +80,14 @@ public class EntryProvider {
     }
 
     private Command getStreamIndexCommand() {
-        return new Command("stream", "index", "0");
+        Command command = new Command("stream", "index", "0");
+        command.setClear(true);
+        return command;
     }
 
     private Command getStreamFirstIdCommand(String id) {
-        return new Command("stream", "firstid", id);
+        Command command = new Command("stream", "firstid", id);
+        command.setClear(true);
+        return command;
     }
 }
