@@ -9,7 +9,7 @@ Ranking najpopularniejszych tagów:
     <#items as item>
         <@compress single_line=true>
         ${item?counter?string["00"]}.
-        [${item.key}](http://www.wykop.pl/tag/${item.key})
+        #[${item.key}](http://www.wykop.pl/tag/${item.key})
         x**${item.value}**
         (${(item.value/totalTagsUsedCounter)?string.percent} wszystkich)
         </@compress>
@@ -25,7 +25,7 @@ Ranking najbardziej zaplusowanych tagów:
     <#items as item>
         <@compress single_line=true>
         ${item?counter?string["00"]}.
-        [${item.key}](http://www.wykop.pl/tag/${item.key})
+        #[${item.key}](http://www.wykop.pl/tag/${item.key})
         - w tagu rozdano **${item.value}** plusów
         </@compress>
 
