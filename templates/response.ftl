@@ -11,7 +11,7 @@ Ranking najpopularniejszych tagów:
         ${item?counter?string["00"]}.
         #[${item.key}](http://www.wykop.pl/tag/${item.key})
         x**${item.value}**
-        (${(item.value/totalTagsUsedCounter)?string.percent} wszystkich)
+        (${(item.value/totalEntriesCounter)?string.percent} wszystkich)
         </@compress>
 
         <#if item?counter == 10><#break></#if>
