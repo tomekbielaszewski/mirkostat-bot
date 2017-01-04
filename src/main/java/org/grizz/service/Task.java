@@ -20,7 +20,6 @@ public class Task {
 
     public void run() {
         Set<Entry> entries = entryProvider.getEntries();
-//        Set<Entry> entries = entryProvider.getDevEntries();
         Statistics stats = statisticsProvider.calculate(entries);
         String formattedStats = statisticsFormatter.format(stats);
         entryPoster.post(formattedStats);

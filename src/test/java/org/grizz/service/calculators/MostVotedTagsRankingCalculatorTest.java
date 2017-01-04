@@ -19,25 +19,25 @@ import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MostVotedTagsRankingCalculatorTest {
-    private static final String TAG1 = "#first";
-    private static final String TAG2 = "#second2";
+    private static final String TAG1 = "first";
+    private static final String TAG2 = "second2";
 
     private MostVotedTagsRankingCalculator calculator = new MostVotedTagsRankingCalculator();
 
     @Test
     public void consume() throws Exception {
-        EntryComment firstComment = EntryComment.builder().body("blah blah "+TAG1+" fljsdl jkl l "+TAG2+" jklfsd.").votes(101).build();
+        EntryComment firstComment = EntryComment.builder().body("blah blah "+tag(TAG1)+" fljsdl jkl l "+tag(TAG2)+" jklfsd.").votes(101).build();
         EntryComment secondComment = EntryComment.builder().body("").votes(100).build();
-        EntryComment thirdComment = EntryComment.builder().body(TAG1).votes(100).build();
+        EntryComment thirdComment = EntryComment.builder().body(tag(TAG1)).votes(100).build();
 
-        Entry entry = Entry.builder().votes(100).body(TAG2)
+        Entry entry = Entry.builder().votes(100).body(tag(TAG2))
                 .comments(Lists.newArrayList(
                         thirdComment,
                         secondComment,
                         firstComment
                 )).build();
 
-        Entry entry2 = Entry.builder().votes(100).body(TAG1 + " jkl fldskj jkl fdskl" + TAG2)
+        Entry entry2 = Entry.builder().votes(100).body(tag(TAG1) + " jkl fldskj jkl fdskl" + tag(TAG2))
                 .comments(Lists.newArrayList()).build();
 
         Entry entry3 = Entry.builder().votes(100).body("")
@@ -51,4 +51,7 @@ public class MostVotedTagsRankingCalculatorTest {
         assertThat(value.get(1), is(new RankedObject(TAG2, 201)));
     }
 
+    private String tag(String name) {
+        return '#'+name;
+    }
 }
