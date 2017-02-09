@@ -14,7 +14,7 @@ Ranking najpopularniejszych tagów:
         (${(item.value/totalEntriesCounter)?string.percent} wszystkich)
         </@compress>
 
-        <#if item?counter == 10><#break></#if>
+        <#if item?counter == 20><#break></#if>
     </#items>
 </#list>
 
@@ -29,7 +29,7 @@ Ranking najbardziej zaplusowanych tagów:
         - w tagu rozdano **${item.value}** plusów
         </@compress>
 
-        <#if item?counter == 10><#break></#if>
+        <#if item?counter == 20><#break></#if>
     </#items>
 </#list>
 
