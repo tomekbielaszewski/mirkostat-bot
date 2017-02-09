@@ -68,6 +68,24 @@ Ranking najlepszych obrazków:
 </#list>
 
 ------------------------------------
+
+<#list videoRanking>
+Ranking najlepszych filmików:
+    <#items as item>
+        <@compress single_line=true>
+        ${item?counter?string["00"]}.
+            <#if Entry.isInstance(item.key)>[(#)](http://www.wykop.pl/wpis/${item.key.id})</#if>
+            <#if EntryComment.isInstance(item.key)>[(#)](http://www.wykop.pl/wpis/${item.key.entryId}/#comment-${item.key.id})</#if>
+        | [(VID)](${item.key.embed.url})
+        **+${item.value}**
+        Wstawił: @${item.key.author}
+        </@compress>
+
+        <#if item?counter == 10><#break></#if>
+    </#items>
+</#list>
+
+------------------------------------
 <#assign mostVotedUser=mostVotedUsersRanking?first>
 
 Najbardziej zaplusowany Mirek @${mostVotedUser.key} dostał łącznie **${mostVotedUser.value} plusów** zdobytych we wpisach i komentarzach. Brawo! Atencja musi się zgadzać!
