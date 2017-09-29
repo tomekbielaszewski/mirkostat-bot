@@ -18,7 +18,7 @@ public class Task {
     @Autowired
     private EntryPoster entryPoster;
 
-    public void run() {
+    public void run(int hoursOfHistory) { //TODO dokonfigurować hoursOfHistory
         Set<Entry> entries = entryProvider.getEntries();
         Statistics stats = statisticsProvider.calculate(entries);
         String formattedStats = statisticsFormatter.format(stats);
