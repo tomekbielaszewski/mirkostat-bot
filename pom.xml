@@ -12,7 +12,7 @@
     <groupId>org.grizz</groupId>
     <artifactId>Mirkostatbot</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0.BUILD-SNAPSHOT</version>
+    <version>3.0.0.BUILD-SNAPSHOT</version>
     <name>Mirkostatbot</name>
 
     <properties>
@@ -47,11 +47,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>17.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

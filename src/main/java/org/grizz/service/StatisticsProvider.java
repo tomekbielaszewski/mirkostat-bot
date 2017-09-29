@@ -1,5 +1,6 @@
 package org.grizz.service;
 
+import lombok.extern.log4j.Log4j;
 import org.grizz.model.Statistics;
 import org.grizz.service.calculators.StatisticsCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,16 @@ import pl.grizwold.microblog.model.Entry;
 import java.util.List;
 
 @Service
+@Log4j
 public class StatisticsProvider {
     @Autowired
     private List<StatisticsCalculator> calculators;
 
     public Statistics calculate(List<Entry> entries) {
-        calculators.forEach(c -> c.consume(entries));
+        calculators.forEach(c -> {
+            log.info("Calculating " + c.getName());
+            c.consume(entries);
+        });
         return getStatistics(calculators);
     }
 
