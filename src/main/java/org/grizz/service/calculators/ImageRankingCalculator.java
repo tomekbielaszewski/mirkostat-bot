@@ -1,14 +1,14 @@
 package org.grizz.service.calculators;
 
-import org.grizz.model.Embed;
-import org.grizz.model.EmbedType;
-import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SimpleRanking;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Embed;
+import pl.grizwold.microblog.model.EmbedType;
+import pl.grizwold.microblog.model.Entry;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Component
 public class ImageRankingCalculator implements StatisticsCalculator {
@@ -16,14 +16,14 @@ public class ImageRankingCalculator implements StatisticsCalculator {
     private Ranking ranking = new SimpleRanking();
 
     @Override
-    public void consume(Set<Entry> entries) {
+    public void consume(List<Entry> entries) {
         entries.forEach(e -> {
             if (isImagePresent(e.getEmbed())) {
-                ranking.add(e, e.getVotes());
+                ranking.add(e, e.getVoteCount());
             }
             e.getComments().forEach(c -> {
                 if (isImagePresent(c.getEmbed())) {
-                    ranking.add(c, c.getVotes());
+                    ranking.add(c, c.getVoteCount());
                 }
             });
         });

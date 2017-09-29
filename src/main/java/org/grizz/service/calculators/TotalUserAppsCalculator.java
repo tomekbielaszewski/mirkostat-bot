@@ -2,9 +2,10 @@ package org.grizz.service.calculators;
 
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
-import org.grizz.model.Entry;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
 
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -13,7 +14,7 @@ public class TotalUserAppsCalculator implements StatisticsCalculator {
     private Set<String> apps = Sets.newHashSet();
 
     @Override
-    public void consume(Set<Entry> entries) {
+    public void consume(List<Entry> entries) {
         entries.forEach(e -> {
             count(e.getApp());
             e.getComments().forEach(c -> count(c.getApp()));

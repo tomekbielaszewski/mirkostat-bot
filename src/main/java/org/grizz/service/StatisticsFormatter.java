@@ -5,11 +5,11 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.grizz.model.Entry;
-import org.grizz.model.EntryComment;
 import org.grizz.model.Statistics;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.EntryComment;
 
 import java.io.IOException;
 import java.io.StringWriter;

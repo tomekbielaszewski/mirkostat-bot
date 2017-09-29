@@ -1,21 +1,19 @@
 package org.grizz.service.calculators;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import org.grizz.model.Entry;
-import org.grizz.model.EntryComment;
 import org.grizz.service.calculators.structures.RankedObject;
 import org.junit.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.EntryComment;
 
 import java.util.List;
 
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,9 +25,9 @@ public class UserCommentCountRankingCalculatorTest {
 
     @Test
     public void consume() throws Exception {
-        EntryComment firstComment = EntryComment.builder().author(AUTHOR_1).votes(8922).build();
-        EntryComment secondComment = EntryComment.builder().author(AUTHOR_2).votes(8921).build();
-        EntryComment thirdComment = EntryComment.builder().author(AUTHOR_1).votes(784).build();
+        EntryComment firstComment = EntryComment.builder().author(AUTHOR_1).voteCount(8922).build();
+        EntryComment secondComment = EntryComment.builder().author(AUTHOR_2).voteCount(8921).build();
+        EntryComment thirdComment = EntryComment.builder().author(AUTHOR_1).voteCount(784).build();
         EntryComment fourthComment = EntryComment.builder().author(AUTHOR_2).build();
         EntryComment fifthComment = EntryComment.builder().author(AUTHOR_1).build();
 
@@ -46,7 +44,7 @@ public class UserCommentCountRankingCalculatorTest {
         Entry entry3 = Entry.builder().author(AUTHOR_1)
                 .comments(Lists.newArrayList()).build();
 
-        calculator.consume(Sets.newHashSet(entry, entry2, entry3));
+        calculator.consume(Lists.newArrayList(entry, entry2, entry3));
         List<RankedObject> value = (List<RankedObject>) calculator.getValue();
 
         assertThat(value, hasSize(2));

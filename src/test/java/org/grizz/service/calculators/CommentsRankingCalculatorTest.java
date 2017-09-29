@@ -1,22 +1,19 @@
 package org.grizz.service.calculators;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import org.grizz.model.Entry;
-import org.grizz.model.EntryComment;
 import org.grizz.service.calculators.structures.RankedObject;
-import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.EntryComment;
 
 import java.util.List;
 
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommentsRankingCalculatorTest {
@@ -27,9 +24,9 @@ public class CommentsRankingCalculatorTest {
 
     @Test
     public void doesNotCountingEntryWithoutComments() throws Exception {
-        Entry entry = Entry.builder().author(AUTHOR_1).votes(123).comments(Lists.newArrayList()).build();
+        Entry entry = Entry.builder().author(AUTHOR_1).voteCount(123).comments(Lists.newArrayList()).build();
 
-        calculator.consume(Sets.newHashSet(entry));
+        calculator.consume(Lists.newArrayList(entry));
         List<RankedObject> value = (List<RankedObject>) calculator.getValue();
 
         assertThat(value, hasSize(0));
@@ -37,9 +34,9 @@ public class CommentsRankingCalculatorTest {
 
     @Test
     public void commentsAreOrderedBasedOnVotes() throws Exception {
-        EntryComment firstComment = EntryComment.builder().author(AUTHOR_1).votes(8922).build();
-        EntryComment secondComment = EntryComment.builder().author(AUTHOR_2).votes(8921).build();
-        EntryComment thirdComment = EntryComment.builder().author(AUTHOR_1).votes(784).build();
+        EntryComment firstComment = EntryComment.builder().author(AUTHOR_1).voteCount(8922).build();
+        EntryComment secondComment = EntryComment.builder().author(AUTHOR_2).voteCount(8921).build();
+        EntryComment thirdComment = EntryComment.builder().author(AUTHOR_1).voteCount(784).build();
 
         Entry entry = Entry.builder().author(AUTHOR_1).body(random(4567))
                 .comments(Lists.newArrayList(
@@ -48,7 +45,7 @@ public class CommentsRankingCalculatorTest {
                         firstComment
                 )).build();
 
-        calculator.consume(Sets.newHashSet(entry));
+        calculator.consume(Lists.newArrayList(entry));
         List<RankedObject> value = (List<RankedObject>) calculator.getValue();
 
         assertThat(value, hasSize(3));
@@ -59,10 +56,10 @@ public class CommentsRankingCalculatorTest {
 
     @Test
     public void countsCommentsFromTwoDifferentEntries() throws Exception {
-        EntryComment firstComment = EntryComment.builder().author(AUTHOR_1).votes(8922).build();
-        EntryComment secondComment = EntryComment.builder().author(AUTHOR_2).votes(8921).build();
-        EntryComment thirdComment = EntryComment.builder().author(AUTHOR_1).votes(784).build();
-        EntryComment fourthComment = EntryComment.builder().author(AUTHOR_2).votes(783).build();
+        EntryComment firstComment = EntryComment.builder().author(AUTHOR_1).voteCount(8922).build();
+        EntryComment secondComment = EntryComment.builder().author(AUTHOR_2).voteCount(8921).build();
+        EntryComment thirdComment = EntryComment.builder().author(AUTHOR_1).voteCount(784).build();
+        EntryComment fourthComment = EntryComment.builder().author(AUTHOR_2).voteCount(783).build();
 
         Entry entry = Entry.builder().author(AUTHOR_1)
                 .comments(Lists.newArrayList(
@@ -76,7 +73,7 @@ public class CommentsRankingCalculatorTest {
                         secondComment
                 )).build();
 
-        calculator.consume(Sets.newHashSet(entry, entry2));
+        calculator.consume(Lists.newArrayList(entry, entry2));
         List<RankedObject> value = (List<RankedObject>) calculator.getValue();
 
         assertThat(value, hasSize(4));

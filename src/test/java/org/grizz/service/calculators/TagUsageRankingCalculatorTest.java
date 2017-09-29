@@ -1,20 +1,18 @@
 package org.grizz.service.calculators;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import org.grizz.model.Entry;
-import org.grizz.model.EntryComment;
 import org.grizz.service.calculators.structures.RankedObject;
 import org.junit.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.EntryComment;
 
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -26,7 +24,7 @@ public class TagUsageRankingCalculatorTest {
 
     @Test
     public void consume() throws Exception {
-        EntryComment firstComment = EntryComment.builder().body("blah blah "+tag(TAG1)+" fljsdl jkl l "+tag(TAG2)+" jklfsd.").build();
+        EntryComment firstComment = EntryComment.builder().body("blah blah " + tag(TAG1) + " fljsdl jkl l " + tag(TAG2) + " jklfsd.").build();
         EntryComment secondComment = EntryComment.builder().body("").build();
         EntryComment thirdComment = EntryComment.builder().body(tag(TAG1)).build();
 
@@ -43,7 +41,7 @@ public class TagUsageRankingCalculatorTest {
         Entry entry3 = Entry.builder().body("")
                 .comments(Lists.newArrayList()).build();
 
-        calculator.consume(Sets.newHashSet(entry, entry2, entry3));
+        calculator.consume(Lists.newArrayList(entry, entry2, entry3));
         List<RankedObject> value = (List<RankedObject>) calculator.getValue();
 
         assertThat(value, hasSize(2));
@@ -52,6 +50,6 @@ public class TagUsageRankingCalculatorTest {
     }
 
     private String tag(String name) {
-        return '#'+name;
+        return '#' + name;
     }
 }

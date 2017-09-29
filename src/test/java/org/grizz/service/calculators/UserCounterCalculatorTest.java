@@ -1,21 +1,15 @@
 package org.grizz.service.calculators;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import org.grizz.model.Entry;
-import org.grizz.model.EntryComment;
-import org.grizz.model.User;
-import org.grizz.service.calculators.structures.RankedObject;
 import org.junit.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.List;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.EntryComment;
+import pl.grizwold.microblog.model.User;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -47,7 +41,7 @@ public class UserCounterCalculatorTest {
         Entry entry2 = Entry.builder().author(AUTHOR_4).voters(Lists.newArrayList(USER1))
                 .comments(Lists.newArrayList()).build();
 
-        calculator.consume(Sets.newHashSet(entry, entry2));
+        calculator.consume(Lists.newArrayList(entry, entry2));
         int value = (int) calculator.getValue();
 
         assertThat(value, is(6));

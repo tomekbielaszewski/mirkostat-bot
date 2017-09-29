@@ -1,12 +1,11 @@
 package org.grizz.service.calculators;
 
 import com.google.common.collect.Sets;
-import org.grizz.model.Entry;
-import org.grizz.model.Tag;
-import org.grizz.service.calculators.structures.Ranking;
-import org.grizz.service.calculators.structures.TagExtractor;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.Tag;
 
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -15,11 +14,9 @@ public class TotalUsersNotTaggingCalculator implements StatisticsCalculator {
     private Set<String> users = Sets.newHashSet();
 
     @Override
-    public void consume(Set<Entry> entries) {
-        TagExtractor tagExtractor = new TagExtractor();
-
+    public void consume(List<Entry> entries) {
         entries.forEach(e -> {
-            Set<Tag> tags = tagExtractor.extract(e.getBody());
+            Set<Tag> tags = e.getTags();
 
             if(tags.isEmpty()) {
                 users.add(e.getAuthor());

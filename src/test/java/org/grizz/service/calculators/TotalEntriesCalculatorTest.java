@@ -1,16 +1,14 @@
 package org.grizz.service.calculators;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import org.grizz.model.Entry;
-import org.grizz.model.EntryComment;
 import org.junit.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.EntryComment;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -33,7 +31,7 @@ public class TotalEntriesCalculatorTest {
         Entry entry2 = Entry.builder()
                 .comments(Lists.newArrayList()).build();
 
-        calculator.consume(Sets.newHashSet(entry, entry2));
+        calculator.consume(Lists.newArrayList(entry, entry2));
         int value = (int) calculator.getValue();
 
         assertThat(value, is(2));

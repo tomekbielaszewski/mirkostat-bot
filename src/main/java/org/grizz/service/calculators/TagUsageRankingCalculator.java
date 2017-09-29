@@ -1,12 +1,11 @@
 package org.grizz.service.calculators;
 
-import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SummingRanking;
-import org.grizz.service.calculators.structures.TagExtractor;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
 
-import java.util.Set;
+import java.util.List;
 
 @Component
 public class TagUsageRankingCalculator implements StatisticsCalculator {
@@ -14,11 +13,10 @@ public class TagUsageRankingCalculator implements StatisticsCalculator {
     private Ranking ranking = new SummingRanking();
 
     @Override
-    public void consume(Set<Entry> entries) {
-        TagExtractor tagExtractor = new TagExtractor();
+    public void consume(List<Entry> entries) {
         entries.forEach(e -> {
-            tagExtractor.extract(e.getBody()).forEach(t -> ranking.add(t.getName()));
-            e.getComments().forEach(c -> tagExtractor.extract(c.getBody()).forEach(t -> ranking.add(t.getName())));
+            e.getTags().forEach(t -> ranking.add(t.getName()));
+            e.getComments().forEach(c -> c.getTags().forEach(t -> ranking.add(t.getName())));
         });
     }
 

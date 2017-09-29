@@ -1,23 +1,21 @@
 package org.grizz.service;
 
-import org.grizz.model.Entry;
 import org.grizz.model.Statistics;
 import org.grizz.service.calculators.StatisticsCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.grizwold.microblog.model.Entry;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class StatisticsProvider {
     @Autowired
     private List<StatisticsCalculator> calculators;
 
-    public Statistics calculate(Set<Entry> entries) {
+    public Statistics calculate(List<Entry> entries) {
         calculators.forEach(c -> c.consume(entries));
-        Statistics stats = getStatistics(calculators);
-        return stats;
+        return getStatistics(calculators);
     }
 
     private Statistics getStatistics(List<StatisticsCalculator> calculators) {

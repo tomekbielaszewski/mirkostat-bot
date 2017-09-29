@@ -1,13 +1,13 @@
 package org.grizz.service.calculators;
 
-import org.grizz.model.Embed;
-import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SummingRanking;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Embed;
+import pl.grizwold.microblog.model.Entry;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Component
 public class EmbedTypeUsageRankingCalculator implements StatisticsCalculator {
@@ -15,7 +15,7 @@ public class EmbedTypeUsageRankingCalculator implements StatisticsCalculator {
     private Ranking ranking = new SummingRanking();
 
     @Override
-    public void consume(Set<Entry> entries) {
+    public void consume(List<Entry> entries) {
         entries.forEach(e -> {
             count(e.getEmbed());
             e.getComments().forEach(comment -> count(comment.getEmbed()));
