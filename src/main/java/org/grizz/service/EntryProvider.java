@@ -12,11 +12,6 @@ import org.grizz.session.SessionProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,17 +26,6 @@ public class EntryProvider {
     private Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
-
-    public Set<Entry> getDevEntries() {
-        try {
-            return Files.readAllLines(Paths.get("testEntries.json"), Charset.defaultCharset()).stream()
-                    .map(line -> gson.fromJson(line, Entry[].class))
-                    .flatMap(Arrays::stream)
-                    .collect(Collectors.toSet());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public Set<Entry> getEntries() {
         Session session = sessionProvider.getGetterSession();
