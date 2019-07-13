@@ -1,29 +1,26 @@
 package org.grizz.service;
 
-import com.crozin.wykop.sdk.Command;
 import lombok.extern.slf4j.Slf4j;
-import org.grizz.session.Session;
-import org.grizz.session.SessionProvider;
+import org.grizz.session.ClientProvider;
 import org.springframework.stereotype.Service;
+import pl.grizwold.wykop.WykopClient;
+import pl.grizwold.wykop.model.WykopResponse;
+import pl.grizwold.wykop.resources.entries.EntryAdd;
 
 @Slf4j
 @Service
 public class EntryPoster {
-    private final SessionProvider sessionProvider;
+    private final ClientProvider clientProvider;
 
-    public EntryPoster(SessionProvider sessionProvider) {
-        this.sessionProvider = sessionProvider;
+    public EntryPoster(ClientProvider clientProvider) {
+        this.clientProvider = clientProvider;
     }
 
     public void post(String formattedStats) {
-        Session session = sessionProvider.getPosterSession();
-        String result = session.execute(postCommand(formattedStats));
-        log.info(result);
+        WykopClient client = clientProvider.getWriterSession();
+        EntryAdd entryAdd = EntryAdd.builder().body(formattedStats).build();
+        WykopResponse response = entryAdd.call(client);
+        log.info(response.getJson());
     }
 
-    private Command postCommand(String bodyContent) {
-        Command cmd = new Command("entries", "add");
-        cmd.addPostParameter("body", bodyContent);
-        return cmd;
-    }
 }

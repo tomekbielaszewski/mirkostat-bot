@@ -22,9 +22,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.crozin</groupId>
-            <artifactId>com.crozin.wykop.sdk</artifactId>
-            <version>1.0.1</version>
+            <groupId>com.github.tomekbielaszewski</groupId>
+            <artifactId>wykop-apiv2-java-client</artifactId>
+            <version>0.1.2</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -85,12 +85,8 @@
 
     <repositories>
         <repository>
-            <id>wykop.pl-java-sdk-mvn-repository</id>
-            <url>https://raw.github.com/Crozin/Wykop.pl-Java-SDK/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
