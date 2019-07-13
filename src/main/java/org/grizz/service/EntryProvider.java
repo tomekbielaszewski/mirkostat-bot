@@ -42,7 +42,7 @@ public class EntryProvider {
                 .page(FIRST_PAGE)
                 .build()
                 .call(session)
-                .getJson();
+                .getData();
         return jsonToEntries(firstPage);
     }
 
@@ -51,7 +51,7 @@ public class EntryProvider {
                 .firstId(id)
                 .build()
                 .call(session)
-                .getJson();
+                .getData();
         List<Entry> entries = jsonToEntries(json).stream()
                 .filter(this::isOldEntry)
                 .sorted(Comparator.comparing(Entry::getDateAdded))

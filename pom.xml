@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.github.tomekbielaszewski</groupId>
             <artifactId>wykop-apiv2-java-client</artifactId>
-            <version>0.1.2</version>
+            <version>0.1.3</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
