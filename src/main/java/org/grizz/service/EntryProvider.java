@@ -1,76 +1,60 @@
 package org.grizz.service;
 
 import com.crozin.wykop.sdk.Command;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.grizz.model.Entry;
+import org.grizz.config.Configuration;
 import org.grizz.session.Session;
 import org.grizz.session.SessionProvider;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.serializer.DateTimeSerializer;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 @Service
 public class EntryProvider {
-    private final long DAY = 24 * 60 * 60 * 1000;
+    private final ModelResolver modelResolver = new ModelResolver();
+    private final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(DateTime.class, new DateTimeSerializer())
+            .create();
 
     @Autowired
     private SessionProvider sessionProvider;
-    private Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ss")
-            .create();
 
-    public Set<Entry> getEntries() {
+    public Set<Entry> getEntries(Configuration configuration) {
         Session session = sessionProvider.getGetterSession();
-        List<Entry> allEntries = Lists.newArrayList();
-        allEntries.addAll(getFirstPage(session));
-        allEntries.addAll(getNextPages(allEntries.get(allEntries.size() - 1).getId(), session));
-        return FluentIterable.from(allEntries).toSet();
+        DateTime entriesMaxAge = DateTime.now().minusHours(configuration.getHoursOfHistory());
+
+        return IntStream.range(0, 100)
+                .parallel()
+                .mapToObj(page -> getPage(page, session, configuration.getWykopEndpoint()))
+                .flatMap(Collection::stream)
+                .filter(entry -> isOldEntry(entry, entriesMaxAge))
+                .collect(Collectors.toSet());
     }
 
-    private List<Entry> getFirstPage(Session session) {
-        String firstPage = session.execute(getStreamIndexCommand());
-        Entry[] entries = gson.fromJson(firstPage, Entry[].class);
-        return Lists.newArrayList(entries);
+    private List<Entry> getPage(int page, Session session, Configuration.WykopEndpoint endpoint) {
+        Command command = getCommand(endpoint.getResource(), endpoint.getMethod(), String.valueOf(page));
+        String jsonResult = session.execute(command);
+        return Arrays.asList(gson.fromJson(jsonResult, modelResolver.resolve(endpoint.getResource())));
     }
 
-    private List<Entry> getNextPages(Long id, Session session) {
-        List<Entry> nextPage = getNextPage(id, session).stream()
-                .filter(e -> isOldEntry(e))
-                .collect(Collectors.toList());
-        if (!nextPage.isEmpty()) {
-            Entry lastEntry = nextPage.get(nextPage.size() - 1);
-            nextPage.addAll(getNextPages(lastEntry.getId(), session));
-        }
-        return nextPage;
+    private boolean isOldEntry(Entry e, DateTime entriesMaxAge) {
+        return e.getDateAdded().isAfter(entriesMaxAge);
     }
 
-    private boolean isOldEntry(Entry e) {
-        return System.currentTimeMillis() - DAY < e.getDateAdded().getTime();
-    }
-
-    private List<Entry> getNextPage(Long id, Session session) {
-        String firstPage = session.execute(getStreamFirstIdCommand(id.toString()));
-        Entry[] entries = gson.fromJson(firstPage, Entry[].class);
-        log.info(entries[entries.length - 1].getDateAdded().toString());
-        return Lists.newArrayList(entries);
-    }
-
-    private Command getStreamIndexCommand() {
-        Command command = new Command("stream", "index", "0");
-        command.setClear(true);
-        return command;
-    }
-
-    private Command getStreamFirstIdCommand(String id) {
-        Command command = new Command("stream", "firstid", id);
+    private Command getCommand(String resource, String method, String... arguments) {
+        Command command = new Command(resource, method, arguments);
         command.setClear(true);
         return command;
     }

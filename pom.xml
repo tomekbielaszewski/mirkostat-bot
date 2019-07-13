@@ -27,6 +27,11 @@
             <version>1.0.1</version>
         </dependency>
         <dependency>
+            <groupId>pl.grizwold</groupId>
+            <artifactId>microblog-model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.14.4</version>
@@ -51,6 +56,11 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>2.3.23</version>
+        </dependency>
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.72</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -84,6 +94,14 @@
     </dependencies>
 
     <repositories>
+        <repository>
+            <id>microblog-model-mvn-repository</id>
+            <url>https://raw.github.com/tomekbielaszewski/microblog-model/mvn-repo/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
         <repository>
             <id>wykop.pl-java-sdk-mvn-repository</id>
             <url>https://raw.github.com/Crozin/Wykop.pl-Java-SDK/mvn-repo/</url>

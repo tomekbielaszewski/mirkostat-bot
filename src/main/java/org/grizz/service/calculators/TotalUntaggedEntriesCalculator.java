@@ -1,9 +1,8 @@
 package org.grizz.service.calculators;
 
-import org.grizz.model.Entry;
-import org.grizz.model.Tag;
-import org.grizz.service.calculators.structures.TagExtractor;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.Tag;
 
 import java.util.Set;
 
@@ -14,12 +13,10 @@ public class TotalUntaggedEntriesCalculator implements StatisticsCalculator {
 
     @Override
     public void consume(Set<Entry> entries) {
-        TagExtractor tagExtractor = new TagExtractor();
-
         entries.forEach(e -> {
-            Set<Tag> tags = tagExtractor.extract(e.getBody());
+            Set<Tag> tags = e.getTags();
 
-            if(tags.isEmpty()) {
+            if (tags.isEmpty()) {
                 untaggedEntriesCounter++;
             }
         });

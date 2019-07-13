@@ -1,11 +1,11 @@
 package org.grizz.service.calculators;
 
-import org.grizz.model.Embed;
-import org.grizz.model.EmbedType;
-import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SimpleRanking;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Embed;
+import pl.grizwold.microblog.model.EmbedType;
+import pl.grizwold.microblog.model.Entry;
 
 import java.util.Optional;
 import java.util.Set;
@@ -19,11 +19,11 @@ public class VideoRankingCalculator implements StatisticsCalculator {
     public void consume(Set<Entry> entries) {
         entries.forEach(e -> {
             if (isVideoPresent(e.getEmbed())) {
-                ranking.add(e, e.getVotes());
+                ranking.add(e, e.getVoteCount());
             }
             e.getComments().forEach(c -> {
                 if (isVideoPresent(c.getEmbed())) {
-                    ranking.add(c, c.getVotes());
+                    ranking.add(c, c.getVoteCount());
                 }
             });
         });

@@ -1,10 +1,9 @@
 package org.grizz.service.calculators;
 
-import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SummingRanking;
-import org.grizz.service.calculators.structures.TagExtractor;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
 
 import java.util.Set;
 
@@ -15,10 +14,9 @@ public class MostVotedTagsRankingCalculator implements StatisticsCalculator {
 
     @Override
     public void consume(Set<Entry> entries) {
-        TagExtractor tagExtractor = new TagExtractor();
         entries.forEach(e -> {
-            tagExtractor.extract(e.getBody()).forEach(t -> ranking.add(t.getName(), e.getVotes()));
-            e.getComments().forEach(c -> tagExtractor.extract(c.getBody()).forEach(t -> ranking.add(t.getName(), c.getVotes())));
+            e.getTags().forEach(t -> ranking.add(t.getName(), e.getVoteCount()));
+            e.getComments().forEach(c -> c.getTags().forEach(t -> ranking.add(t.getName(), c.getVoteCount())));
         });
     }
 

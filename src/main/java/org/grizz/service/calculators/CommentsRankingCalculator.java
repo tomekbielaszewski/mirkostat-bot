@@ -1,9 +1,9 @@
 package org.grizz.service.calculators;
 
-import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SimpleRanking;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
 
 import java.util.Set;
 
@@ -14,7 +14,7 @@ public class CommentsRankingCalculator implements StatisticsCalculator {
 
     @Override
     public void consume(Set<Entry> entries) {
-        entries.forEach(e -> e.getComments().forEach(c -> ranking.add(c, c.getVotes())));
+        entries.forEach(e -> e.getComments().forEach(c -> ranking.add(c, c.getVoteCount())));
     }
 
     @Override

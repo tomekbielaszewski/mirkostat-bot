@@ -1,10 +1,9 @@
 package org.grizz.service.calculators;
 
 import com.google.common.collect.Sets;
-import org.grizz.model.Entry;
-import org.grizz.model.Tag;
-import org.grizz.service.calculators.structures.TagExtractor;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.Tag;
 
 import java.util.Set;
 
@@ -15,10 +14,9 @@ public class TotalTagsUsedCalculator implements StatisticsCalculator {
 
     @Override
     public void consume(Set<Entry> entries) {
-        TagExtractor tagExtractor = new TagExtractor();
         entries.forEach(e -> {
-            tags.addAll(tagExtractor.extract(e.getBody()));
-            e.getComments().forEach(c -> tags.addAll(tagExtractor.extract(c.getBody())));
+            tags.addAll(e.getTags());
+            e.getComments().forEach(c -> tags.addAll(c.getTags()));
         });
     }
 

@@ -1,11 +1,12 @@
 package org.grizz.service.calculators;
 
-import org.apache.commons.lang3.StringUtils;
-import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.SummingRanking;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
+import pl.grizwold.microblog.model.UserSex;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -25,10 +26,9 @@ public class GenderActivityRankingCalculator implements StatisticsCalculator {
         });
     }
 
-    private void count(String gender) {
-        if (StringUtils.isBlank(gender))
-            return;
-        ranking.add(gender);
+    private void count(UserSex gender) {
+        Optional.ofNullable(gender)
+                .ifPresent(g -> ranking.add(gender));
     }
 
     @Override

@@ -1,7 +1,7 @@
 package org.grizz.service.calculators;
 
-import org.grizz.model.Entry;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
 
 import java.util.Set;
 
@@ -13,8 +13,8 @@ public class TotalVotesCalculator implements StatisticsCalculator {
     @Override
     public void consume(Set<Entry> entries) {
         entries.forEach(e -> {
-            totalVotesCounter += e.getVotes();
-            e.getComments().forEach(c -> totalVotesCounter += c.getVotes());
+            totalVotesCounter += e.getVoteCount();
+            e.getComments().forEach(c -> totalVotesCounter += c.getVoteCount());
         });
     }
 

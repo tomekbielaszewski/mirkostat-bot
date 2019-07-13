@@ -2,8 +2,8 @@ package org.grizz.service.calculators;
 
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
-import org.grizz.model.Entry;
 import org.springframework.stereotype.Component;
+import pl.grizwold.microblog.model.Entry;
 
 import java.util.Set;
 
