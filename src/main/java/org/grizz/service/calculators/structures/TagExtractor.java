@@ -15,7 +15,10 @@ public class TagExtractor {
         Matcher m = p.matcher(body);
 
         while (m.find()) {
-            tags.add(Tag.builder().name(m.group().trim().replaceAll("#", "")).build());
+            String tagName = m.group()
+                    .trim()
+                    .replaceAll("#", "");
+            tags.add(new Tag(tagName));
         }
 
         return tags;

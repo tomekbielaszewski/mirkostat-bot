@@ -2,7 +2,6 @@ package org.grizz.service.calculators;
 
 import org.grizz.model.Entry;
 import org.grizz.service.calculators.structures.Ranking;
-import org.grizz.service.calculators.structures.SimpleRanking;
 import org.grizz.service.calculators.structures.SummingRanking;
 import org.springframework.stereotype.Component;
 

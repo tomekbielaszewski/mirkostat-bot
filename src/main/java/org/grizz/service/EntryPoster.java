@@ -4,14 +4,16 @@ import com.crozin.wykop.sdk.Command;
 import lombok.extern.slf4j.Slf4j;
 import org.grizz.session.Session;
 import org.grizz.session.SessionProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class EntryPoster {
-    @Autowired
-    private SessionProvider sessionProvider;
+    private final SessionProvider sessionProvider;
+
+    public EntryPoster(SessionProvider sessionProvider) {
+        this.sessionProvider = sessionProvider;
+    }
 
     public void post(String formattedStats) {
         Session session = sessionProvider.getPosterSession();

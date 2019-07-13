@@ -2,21 +2,23 @@ package org.grizz.service;
 
 import org.grizz.model.Entry;
 import org.grizz.model.Statistics;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
 @Component
 public class Task {
-    @Autowired
-    private EntryProvider entryProvider;
-    @Autowired
-    private StatisticsProvider statisticsProvider;
-    @Autowired
-    private StatisticsFormatter statisticsFormatter;
-    @Autowired
-    private EntryPoster entryPoster;
+    private final EntryProvider entryProvider;
+    private final StatisticsProvider statisticsProvider;
+    private final StatisticsFormatter statisticsFormatter;
+    private final EntryPoster entryPoster;
+
+    public Task(EntryProvider entryProvider, StatisticsProvider statisticsProvider, StatisticsFormatter statisticsFormatter, EntryPoster entryPoster) {
+        this.entryProvider = entryProvider;
+        this.statisticsProvider = statisticsProvider;
+        this.statisticsFormatter = statisticsFormatter;
+        this.entryPoster = entryPoster;
+    }
 
     public void run() {
         Set<Entry> entries = entryProvider.getEntries();

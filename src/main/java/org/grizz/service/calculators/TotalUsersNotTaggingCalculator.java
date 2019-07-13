@@ -3,7 +3,6 @@ package org.grizz.service.calculators;
 import com.google.common.collect.Sets;
 import org.grizz.model.Entry;
 import org.grizz.model.Tag;
-import org.grizz.service.calculators.structures.Ranking;
 import org.grizz.service.calculators.structures.TagExtractor;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,7 @@ public class TotalUsersNotTaggingCalculator implements StatisticsCalculator {
         entries.forEach(e -> {
             Set<Tag> tags = tagExtractor.extract(e.getBody());
 
-            if(tags.isEmpty()) {
+            if (tags.isEmpty()) {
                 users.add(e.getAuthor());
             }
         });

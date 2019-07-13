@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.grizz.model.Entry;
 import org.grizz.session.Session;
 import org.grizz.session.SessionProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +20,14 @@ import java.util.stream.Collectors;
 public class EntryProvider {
     private final long DAY = 24 * 60 * 60 * 1000;
 
-    @Autowired
-    private SessionProvider sessionProvider;
+    private final SessionProvider sessionProvider;
     private Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
+
+    public EntryProvider(SessionProvider sessionProvider) {
+        this.sessionProvider = sessionProvider;
+    }
 
     public Set<Entry> getEntries() {
         Session session = sessionProvider.getGetterSession();
@@ -43,7 +45,7 @@ public class EntryProvider {
 
     private List<Entry> getNextPages(Long id, Session session) {
         List<Entry> nextPage = getNextPage(id, session).stream()
-                .filter(e -> isOldEntry(e))
+                .filter(this::isOldEntry)
                 .collect(Collectors.toList());
         if (!nextPage.isEmpty()) {
             Entry lastEntry = nextPage.get(nextPage.size() - 1);

@@ -1,7 +1,7 @@
 package org.grizz.model;
 
+import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Builder;
 import org.apache.commons.lang3.StringUtils;
 
 @Data
@@ -12,7 +12,7 @@ public class Embed {
     private String url;
 
     public EmbedType getType() {
-        if(StringUtils.isEmpty(type)) {
+        if (StringUtils.isEmpty(type)) {
             return null;
         }
         return EmbedType.valueOf(type.toUpperCase());

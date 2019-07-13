@@ -1,8 +1,8 @@
 package org.grizz.model;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.Builder;
 
 import java.util.Date;
 import java.util.List;
