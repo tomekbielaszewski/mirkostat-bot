@@ -23,7 +23,7 @@ public class ClientProvider {
 
     public WykopClient getReaderSession() {
         return new WykopClient(getterKeyPublic, getterKeySecret)
-                .set(ApiParam.DATA_FULL)
+                .set(ApiParam.DATA_COMPACTED)
                 .set(ApiParam.OUTPUT_CLEAR);
     }
 
